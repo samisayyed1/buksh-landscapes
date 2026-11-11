@@ -15,15 +15,18 @@
 
   /* ---------------- Season awareness ---------------- */
   const now = new Date();
-  const m = now.getMonth();
-  const y = now.getFullYear();
+  let m = now.getMonth(), y = now.getFullYear();
+  try {
+    const parts = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Edmonton", year: "numeric", month: "numeric" }).formatToParts(now);
+    m = +parts.find((p) => p.type === "month").value - 1; y = +parts.find((p) => p.type === "year").value;
+  } catch (e) { /* device time */ }
   const springYear = m >= 9 ? y + 1 : y;
   const season = m >= 4 && m <= 8 ? "build" : m === 3 || m === 9 ? "shoulder" : "snow";
   const MSG = {
     bar: {
       snow: m <= 1 || m >= 10 ? `Snow season: our crews are clearing lots. Spring ${springYear} design visits are booking now.` : `Spring is close. Book your design visit before the ${springYear} calendar fills.`,
       shoulder: m === 3 ? "The ground is thawing. Spring cleanups and first installs are starting." : "Last weeks before freeze-up: final installs and fall cleanups.",
-      build: "Build season: crews are installing across Edmonton, 7 days a week.",
+      build: "Build season: our crews are out installing across Edmonton.",
     },
     dial: {
       snow: m <= 1 || m >= 10
@@ -48,7 +51,7 @@
     el.innerHTML = names.map((n, i) => `<span class="${kind(i)}${i === m ? " is-now" : ""}"${i === m ? ' aria-current="date"' : ""}>${n}</span>`).join("");
   });
   $$("[data-dial-msg]").forEach((el) => (el.textContent = MSG.dial[season]));
-  $$("[data-dial-now]").forEach((el) => (el.textContent = now.toLocaleDateString("en-CA", { month: "long" }) + " · " + { snow: "Snow season", shoulder: "Shoulder season", build: "Build season" }[season]));
+  $$("[data-dial-now]").forEach((el) => (el.textContent = new Date(y, m, 1).toLocaleDateString("en-CA", { month: "long" }) + " · " + { snow: "Snow season", shoulder: "Shoulder season", build: "Build season" }[season]));
 
   /* Phone hours (Edmonton time) */
   try {
@@ -64,6 +67,10 @@
   setSb();
   addEventListener("resize", setSb, { passive: true });
 
+  /* ---------------- Modal helpers (inert background) ---------------- */
+  const bg = () => [$("main"), $("[data-header]"), $(".site-footer"), bar, $("[data-callbar]"), $(".skip")].filter(Boolean);
+  const setInert = (on) => bg().forEach((el) => { if (on) el.setAttribute("inert", ""); else el.removeAttribute("inert"); });
+
   /* ---------------- Mobile menu ---------------- */
   const menu = $("[data-menu]");
   const menuBtn = $("[data-menu-btn]");
@@ -73,12 +80,14 @@
       menu.hidden = false;
       requestAnimationFrame(() => menu.classList.add("is-open"));
       document.body.style.overflow = "hidden";
+      setInert(true);
       menuBtn.setAttribute("aria-expanded", "true");
       $("[data-menu-close]").focus();
     } else {
       menu.classList.remove("is-open");
       menu.hidden = true;
       document.body.style.overflow = "";
+      setInert(false);
       menuBtn.setAttribute("aria-expanded", "false");
       menuBtn.focus();
     }
@@ -93,7 +102,7 @@
   let formInView = false;
   const qSection = $("#quote");
   if (qSection && "IntersectionObserver" in window) {
-    new IntersectionObserver(([en]) => { formInView = en.isIntersecting; }, { threshold: 0.15 }).observe(qSection);
+    new IntersectionObserver(([en]) => { formInView = en.isIntersecting; tick(); }, { threshold: 0.15 }).observe(qSection);
   }
 
   /* ==========================================================
@@ -213,7 +222,8 @@
     track.addEventListener("scroll", () => requestAnimationFrame(mobileTilt), { passive: true });
     mobileTilt();
     if (reduce) cards.forEach((c) => setX(c, 0));
-    desktop.addEventListener("change", () => { mobileTilt(); tick(); });
+    const onMq = () => { mobileTilt(); tick(); };
+    desktop.addEventListener ? desktop.addEventListener("change", onMq) : desktop.addListener(onMq);
   }
 
   /* ---------------- Pointer tilt on service cards ---------------- */
@@ -255,7 +265,7 @@
         if (!en.isIntersecting) return;
         subLinks.forEach((a) => a.classList.remove("is-on"));
         const a = map.get(en.target.id);
-        if (a) { a.classList.add("is-on"); a.scrollIntoView({ block: "nearest", inline: "center", behavior: reduce ? "auto" : "smooth" }); }
+        if (a) { a.classList.add("is-on"); const ul = a.closest("ul"); ul.scrollTo({ left: a.offsetLeft - ul.clientWidth / 2 + a.offsetWidth / 2, behavior: reduce ? "auto" : "smooth" }); }
       });
     }, { rootMargin: "-45% 0px -50% 0px" });
     map.forEach((_, id) => { const s = document.getElementById(id); s && io.observe(s); });
@@ -277,12 +287,12 @@
       const b = list[idx];
       img.src = b.dataset.full; img.alt = b.dataset.caption; cap.textContent = b.dataset.caption;
     };
-    const close = () => { lb.hidden = true; document.body.style.overflow = ""; opener && opener.focus(); };
+    const close = () => { lb.hidden = true; document.body.style.overflow = ""; setInert(false); opener && opener.focus(); };
     document.addEventListener("click", (e) => {
       const b = e.target.closest("[data-full]");
       if (!b) return;
       list = $$("[data-full]").filter((x) => !x.closest("[hidden]"));
-      opener = b; lb.hidden = false; document.body.style.overflow = "hidden"; show(list.indexOf(b));
+      opener = b; lb.hidden = false; document.body.style.overflow = "hidden"; setInert(true); show(list.indexOf(b));
       $("[data-lb-close]", lb).focus();
     });
     $("[data-lb-close]", lb).addEventListener("click", close);
@@ -310,13 +320,14 @@
     // prefill from ?service=
     const pre = new URLSearchParams(location.search).get("service");
     if (pre) $$(`input[name="services"]`, form).forEach((i) => { if (i.value.toLowerCase().includes(pre.toLowerCase())) i.checked = true; });
-    const go = (s) => {
+    const go = (s, focus) => {
       step = s;
       panels.forEach((p, i) => { p.hidden = i !== s; p.classList.toggle("in", i === s); });
       dots.forEach((d, i) => d.classList.toggle("done", i <= s));
       back.hidden = s === 0;
       next.innerHTML = s === panels.length - 1 ? 'Send my request <svg class="i"><use href="#i-arrow"/></svg>' : 'Continue <svg class="i"><use href="#i-arrow"/></svg>';
       meta.textContent = `Step ${s + 1} of ${panels.length}`;
+      if (focus) { const lg = $("legend", panels[s]); lg.tabIndex = -1; lg.focus({ preventScroll: true }); }
     };
     const validate = () => {
       if (step === 0) {
@@ -327,24 +338,28 @@
       }
       if (step === 2) {
         let ok = true;
-        $$("[data-req]", form).forEach((inp) => {
+        $$("[data-req], [data-email]", form).forEach((inp) => {
           const f = inp.closest(".field");
-          let valid = inp.value.trim().length > 1;
-          if (inp.type === "tel") valid = inp.value.replace(/\D/g, "").length >= 10;
-          if (inp.type === "email" && inp.value) valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value);
+          const v = inp.value.trim();
+          let valid = inp.hasAttribute("data-req") ? v.length > 1 : true;
+          if (inp.type === "tel") valid = v.replace(/\D/g, "").length >= 10;
+          if (inp.type === "email") valid = !v || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
           f.classList.toggle("invalid", !valid);
+          if (valid) inp.removeAttribute("aria-invalid"); else inp.setAttribute("aria-invalid", "true");
           if (!valid && ok) { inp.focus(); ok = false; }
         });
         return ok;
       }
       return true;
     };
-    back.addEventListener("click", () => go(step - 1));
+    back.addEventListener("click", () => go(step - 1, true));
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       if (!validate()) return;
-      if (step < panels.length - 1) { go(step + 1); form.scrollIntoView({ block: "nearest", behavior: reduce ? "auto" : "smooth" }); return; }
-      if ($(".hp input", form).value) return; // bot
+      if (step < panels.length - 1) { go(step + 1, true); form.scrollIntoView({ block: "nearest", behavior: reduce ? "auto" : "smooth" }); return; }
+      const done = $("[data-q-done]", form.parentElement);
+      const doneMsg = $("[data-q-done-msg]", done);
+      if ($(".hp input", form).value) { form.hidden = true; done.hidden = false; return; } // bot: pretend success
       const fd = new FormData(form);
       const data = {
         services: fd.getAll("services").join(", "),
@@ -352,9 +367,8 @@
         name: fd.get("name"), phone: fd.get("phone"), email: fd.get("email") || "", address: fd.get("address") || "", notes: fd.get("notes") || "",
       };
       const body = `New quote request from the website\n\nServices: ${data.services}\nProperty: ${data.property}\nTimeline: ${data.timeline}\nBudget: ${data.budget}\n\nName: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email}\nAddress / area: ${data.address}\n\nNotes:\n${data.notes}`;
-      const done = $("[data-q-done]", form.parentElement);
-      const doneMsg = $("[data-q-done-msg]", done);
       next.disabled = true;
+      const summary = $("[data-q-summary]", done), copyBtn = $("[data-q-copy]", done);
       if (FORM_ENDPOINT) {
         try {
           const res = await fetch(FORM_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify({ ...data, _subject: `Quote request: ${data.name}` }) });
@@ -367,10 +381,15 @@
         }
       } else {
         location.href = `mailto:${EMAIL}?subject=${encodeURIComponent("Quote request: " + data.name)}&body=${encodeURIComponent(body)}`;
-        doneMsg.textContent = `Thanks ${data.name.split(" ")[0]}. Your email app should now be open with your request filled in. Press send and we'll call you at ${data.phone} to set up a site visit. If nothing opened, call us at ${PHONE}.`;
+        doneMsg.textContent = `Thanks ${data.name.split(" ")[0]}. Your email app should now be open with your request filled in: press send and we'll call you at ${data.phone}. If no email app opened, copy your request below and send it to ${EMAIL}, or call ${PHONE}.`;
+        summary.textContent = `To: ${EMAIL}\n\n${body}`; summary.hidden = false;
+        if (navigator.clipboard) { copyBtn.hidden = false; copyBtn.onclick = () => navigator.clipboard.writeText(body).then(() => (copyBtn.textContent = "Copied")); }
       }
       form.hidden = true; done.hidden = false; done.focus();
+      next.disabled = false;
     });
+    const editBtn = $("[data-q-edit]", form.parentElement);
+    editBtn && editBtn.addEventListener("click", () => { $("[data-q-done]", form.parentElement).hidden = true; form.hidden = false; go(panels.length - 1, true); });
     go(0);
   }
 

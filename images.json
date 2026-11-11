@@ -1,22 +1,28 @@
 {
  "aerial-modern-build": {
-  "w": 1800,
-  "h": 1012,
+  "w": 3840,
+  "h": 2160,
   "widths": [
-   480,
-   960,
-   1600
+   640,
+   1280,
+   1920,
+   2560,
+   3200,
+   3840
   ],
   "cat": "builds",
   "alt": "Aerial view of a modern Edmonton home with geometric concrete walkways, turf and planting beds"
  },
  "aerial-modern-build-2": {
-  "w": 1800,
-  "h": 1012,
+  "w": 3840,
+  "h": 2160,
   "widths": [
-   480,
-   960,
-   1600
+   640,
+   1280,
+   1920,
+   2560,
+   3200,
+   3840
   ],
   "cat": "builds",
   "alt": "Drone view of a full front-yard build with concrete, sod and rock beds"
@@ -32,12 +38,15 @@
   "alt": "Wide new lawn in front of a large modern home"
  },
  "modern-home-side-lawn": {
-  "w": 1800,
-  "h": 1012,
+  "w": 3840,
+  "h": 2160,
   "widths": [
-   480,
-   960,
-   1600
+   640,
+   1280,
+   1920,
+   2560,
+   3200,
+   3840
   ],
   "cat": "lawns",
   "alt": "Side yard of a modern home with sod, boulders and young trees"
@@ -695,5 +704,31 @@
   ],
   "cat": "none",
   "alt": "Edmonton skyline over the river valley in fall"
+ },
+ "estate-lawn": {
+  "cat": "lawns",
+  "alt": "Estate home with a broad new lawn and curved mulch beds",
+  "w": 4032,
+  "h": 3024,
+  "widths": [
+   640,
+   1280,
+   1920,
+   2560,
+   3200,
+   3840
+  ]
+ },
+ "aerial-hero-portrait": {
+  "w": 1620,
+  "h": 2160,
+  "widths": [
+   640,
+   960,
+   1280,
+   1620
+  ],
+  "cat": "none",
+  "alt": "Aerial view of a finished Buksh Landscapes front yard: modern home, new lawn and geometric concrete walkways"
  }
 }

@@ -5,7 +5,7 @@ import { join, dirname, relative } from "node:path";
 
 const SITE = {
   name: "Buksh Landscapes",
-  url: process.env.SITE_URL || "https://glow-corp.github.io/buksh-landscapes/",
+  url: (process.env.SITE_URL || "https://samisayyed1.github.io/buksh-landscapes/").replace(/\/?$/, "/"),
   // Keep false while this lives on a preview domain so it never competes with bukshlandscapes.com in search.
   indexable: process.env.INDEXABLE === "true",
   phone: "+17809408283",
@@ -82,7 +82,7 @@ for (const file of pages) {
   const meta = fm ? JSON.parse(fm[1]) : {};
   const body = fm ? raw.slice(fm[0].length) : raw;
   const rel = relative(join(SRC, "pages"), file); // e.g. services/landscaping-services/index.html
-  const depth = rel.split("/").length - 1;
+  const depth = rel.split(/[\\/]/).length - 1;
   const root = meta.absRoot ? new URL(SITE.url).pathname : depth ? "../".repeat(depth) : "./";
   const pathUrl = rel.replace(/index\.html$/, "");
   const vars = {
@@ -99,7 +99,9 @@ for (const file of pages) {
     gallery: galleryItems(root),
     photoCount: String(Object.values(images).filter((m) => m.cat !== "none").length),
     preload: meta.hero
-      ? `<link rel="preload" as="image" imagesrcset="${images[meta.hero].widths.map((w) => `${root}assets/img/${meta.hero}-${w}.webp ${w}w`).join(", ")}" imagesizes="100vw" fetchpriority="high">`
+      ? (meta.heroMobile
+          ? `<link rel="preload" as="image" media="(max-width: 699px)" imagesrcset="${images[meta.heroMobile].widths.map((w) => `${root}assets/img/${meta.heroMobile}-${w}.webp ${w}w`).join(", ")}" imagesizes="100vw" fetchpriority="high">\n<link rel="preload" as="image" media="(min-width: 700px)" imagesrcset="${images[meta.hero].widths.map((w) => `${root}assets/img/${meta.hero}-${w}.webp ${w}w`).join(", ")}" imagesizes="100vw" fetchpriority="high">`
+          : `<link rel="preload" as="image" imagesrcset="${images[meta.hero].widths.map((w) => `${root}assets/img/${meta.hero}-${w}.webp ${w}w`).join(", ")}" imagesizes="100vw" fetchpriority="high">`)
       : "",
     schema: meta.schema === false ? "" : "",
   };
@@ -113,7 +115,7 @@ for (const file of pages) {
   writeFileSync(outFile, html);
   if (!rel.startsWith("404")) sitemap.push(SITE.url + pathUrl);
   const left = html.match(/\{\{[^}]+\}\}/g);
-  if (left) console.warn(`! ${rel}: unresolved tokens ${[...new Set(left)].join(" ")}`);
+  if (left) { console.error(`! ${rel}: unresolved tokens ${[...new Set(left)].join(" ")}`); process.exitCode = 1; }
 }
 writeFileSync(join(OUT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemap.map((u) => `  <url><loc>${u}</loc></url>`).join("\n")}\n</urlset>\n`);
 writeFileSync(join(OUT, "robots.txt"), SITE.indexable ? `User-agent: *\nAllow: /\nSitemap: ${SITE.url}sitemap.xml\n` : `User-agent: *\nAllow: /\n`);

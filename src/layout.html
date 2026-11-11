@@ -100,14 +100,14 @@
       </ul>
     </nav>
     <div class="header-cta">
-      <a class="hdr-phone" href="tel:{{phone}}"><svg class="i"><use href="#i-phone"/></svg><span>{{phoneDisplay}}</span></a>
+      <a class="hdr-phone" href="tel:{{phone}}" aria-label="Call {{phoneDisplay}}"><svg class="i"><use href="#i-phone"/></svg><span>{{phoneDisplay}}</span></a>
       <a class="btn btn-gold btn-sm" href="{{root}}contact/#quote">Free quote</a>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="m-menu" data-menu-btn><svg class="i"><use href="#i-menu"/></svg><span class="sr">Open menu</span></button>
     </div>
   </div>
 </header>
 
-<div class="m-menu" id="m-menu" data-menu hidden>
+<div class="m-menu" id="m-menu" data-menu role="dialog" aria-modal="true" aria-label="Menu" hidden>
   <div class="m-menu-in">
     <button class="m-close" type="button" data-menu-close><svg class="i"><use href="#i-x"/></svg><span class="sr">Close menu</span></button>
     <ul class="m-links">
@@ -191,7 +191,7 @@
   <a class="cb-quote" href="{{root}}contact/#quote">Free quote <svg class="i"><use href="#i-arrow"/></svg></a>
 </div>
 
-<div class="lightbox" data-lightbox hidden>
+<div class="lightbox" data-lightbox role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
   <button class="lb-close" type="button" data-lb-close><svg class="i"><use href="#i-x"/></svg><span class="sr">Close photo</span></button>
   <button class="lb-nav lb-prev" type="button" data-lb-prev><svg class="i"><use href="#i-arrow"/></svg><span class="sr">Previous photo</span></button>
   <figure><img alt="" data-lb-img><figcaption data-lb-cap></figcaption></figure>
