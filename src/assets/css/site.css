@@ -408,19 +408,18 @@ p + p { margin-top: 1em; }
 
 .iso-stage { position: relative; min-height: 0; }
 .iso-stage::before { content: ""; position: absolute; left: 50%; top: 55%; width: min(90%, 620px); aspect-ratio: 1.6; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(127, 166, 90, .2), rgba(127, 166, 90, 0)); pointer-events: none; }
-/* The stack is a 2D isometric SVG (no CSS 3D, so iOS Safari matches Chrome). Its viewBox
-   scales it into whatever space the stage has. Layers are <g class="slab"> groups:
-   --off 1 -> 0 drops a layer in; --gapf 1 -> 0 closes the exploded spacing. */
-.iso-svg { position: absolute; left: 0; right: 0; top: var(--iso-top, 0px); bottom: var(--iso-bot, 0px); width: 100%; height: calc(100% - var(--iso-top, 0px) - var(--iso-bot, 0px)); display: block; overflow: visible; }
-.iso-svg .slab { transform: translateY(calc(var(--off, 0) * -170px - var(--gapf, 0) * var(--k, 0) * 10px)); opacity: clamp(0, calc(1 - var(--off, 0) * 1.4), 1); }
-.iso-svg .hover { transform: translateY(calc(var(--gapf, 0) * (var(--k, 1) - 1) * -10px)); opacity: max(calc(clamp(0, calc(var(--off, 0) * 30), 1) * (1 - var(--off, 0)) * .7), calc(var(--gapf, 0) * .32 * (1 - var(--off, 0)))); }
-.iso-svg .ao { opacity: calc(1 - var(--gapf, 0)); }
-.iso-svg .slope, .iso-svg .drain { opacity: var(--drain, 0); }
-.iso-svg .drain line { stroke: #9fd6ff; stroke-width: 2.6; stroke-linecap: round; animation: drip 1.7s cubic-bezier(.4, 0, .6, 1) infinite; }
-@keyframes drip { from { transform: translate(0, 0); opacity: 0; } 25% { opacity: .9; } to { transform: translate(26px, 15px); opacity: 0; } }
-.iso-svg .sheen-r { transform: translateX(-60px); }
-.anatomy.is-final .iso-svg .sheen-r { animation: sheen 1.5s .35s cubic-bezier(.25, .7, .25, 1) both; }
-@keyframes sheen { from { transform: translateX(-60px); } to { transform: translateX(640px); } }
+/* The stack is five pre-rendered layer images (plus drop shadows), centred in a square
+   box that fits the stage. JS moves them with transform/opacity only. */
+.iso-art { position: absolute; left: 0; right: 0; top: var(--iso-top, 0px); bottom: var(--iso-bot, 0px); container-type: size; }
+.iso-box { position: absolute; left: 50%; top: 50%; width: min(100cqw, 100cqh); aspect-ratio: 1; transform: translate(-50%, -50%); }
+@supports not (width: 1cqw) { .iso-box { width: min(100%, 56vh); } }
+/* one composited image per layer: only transform/opacity change while scrolling */
+.iso-box > img { position: absolute; inset: 0; width: 100%; height: 100%; will-change: transform, opacity; -webkit-backface-visibility: hidden; backface-visibility: hidden; pointer-events: none; -webkit-user-select: none; user-select: none; }
+.iso-h, .iso-slope { opacity: 0; }
+.iso-sheen { position: absolute; inset: 0; pointer-events: none; overflow: hidden; -webkit-clip-path: polygon(50% 19.2%, 92% 43.4%, 50% 67.6%, 8% 43.4%); clip-path: polygon(50% 19.2%, 92% 43.4%, 50% 67.6%, 8% 43.4%); }
+.iso-sheen i { position: absolute; top: -20%; bottom: -20%; left: 0; width: 26%; background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .36), rgba(255, 255, 255, 0)); transform: translate3d(-130%, 0, 0) skewX(-28deg); will-change: transform; }
+.anatomy.is-final .iso-sheen i { animation: sheen 1.7s .3s cubic-bezier(.3, .6, .2, 1) both; }
+@keyframes sheen { from { transform: translate3d(-130%, 0, 0) skewX(-28deg); } to { transform: translate3d(460%, 0, 0) skewX(-28deg); } }
 
 @media (min-width: 1000px) {
   .anatomy-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); grid-template-rows: 1fr; align-items: center; gap: 56px; padding-top: var(--header-h); }
@@ -798,15 +797,12 @@ a.c-card:hover { background: rgba(255, 255, 255, .12); }
   .js .anatomy-scene { height: auto; }
   .js .anatomy-sticky { position: relative; height: auto; padding-block: 60px; }
   .js .a-step { grid-area: auto; position: relative; opacity: 1; transform: none; margin-bottom: 14px; }
-  .slab, .hover { --off: 0 !important; }
-  .iso-svg { --gapf: 0 !important; }
   .spec li { opacity: 1; }
   .iso-stage { min-height: min(80vw, 480px); }
   .js .anatomy-sticky { height: auto !important; }
   .anatomy-grid { grid-template-rows: auto auto !important; }
 }
 html:not(.js) .iso-stage { min-height: min(80vw, 480px); }
-html:not(.js) .slab, html:not(.js) .hover { --off: 0 !important; }
 html:not(.js) .spec li { opacity: 1; }
 .q-done-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center; margin-top: 22px; }
 .q-done-actions .btn { margin-top: 0; }
@@ -850,9 +846,9 @@ html:not(.js) .spec li { opacity: 1; }
   /* the key becomes a compact progress strip: one swatch per layer, the active one opens
      into a chip with its name and spec; builds left to right like the stack builds up */
   .spec { position: relative; display: flex; flex-direction: row-reverse; justify-content: flex-end; align-items: center; gap: 7px; margin-top: 16px; padding-bottom: 24px; max-width: none; border: 0; }
-  .spec li { position: static; display: grid; place-items: center; width: 34px; height: 34px; padding: 0; border: 1px solid rgba(255, 255, 255, .1); border-radius: 50%; background: rgba(255, 255, 255, .03); opacity: .38; transition: opacity .5s var(--ease-out), background-color .4s, border-color .4s, box-shadow .4s; }
+  .spec li { position: static; display: grid; grid-template-columns: 1fr; place-items: center; gap: 0; width: 34px; height: 34px; padding: 0; border: 1px solid rgba(255, 255, 255, .1); border-radius: 50%; background: rgba(255, 255, 255, .03); opacity: .38; transition: opacity .5s var(--ease-out), background-color .4s, border-color .4s, box-shadow .4s; }
   .spec li::before, .spec-bar, .spec-v { display: none; }
-  .spec .sw { width: 15px; height: 17px; }
+  .spec .sw { width: 15px; height: 17px; display: block; margin: 0; }
   /* caption under the strip: the active layer's name and spec, one line, never truncated */
   .spec-n { display: block; position: absolute; left: 0; bottom: 0; font: 500 .64rem/1 var(--f-mono); letter-spacing: .13em; text-transform: uppercase; color: var(--aspen-2); white-space: nowrap; opacity: 0; transform: translateY(4px); transition: opacity .35s var(--ease-out), transform .45s var(--ease-out); }
   .spec-n::after { content: "  ·  " attr(data-v); color: #9fb4a8; }

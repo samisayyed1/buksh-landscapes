@@ -184,7 +184,8 @@
       }
       if (el.hasAttribute("data-scene")) {
         const p = clamp(-r.top / Math.max(1, r.height - vh));
-        el.style.setProperty("--p", p.toFixed(4));
+        // scenes drive their own elements; an inherited CSS var on the scene root would
+        // restyle its whole subtree every frame, so none is written here
         const fn = sceneHandlers[el.dataset.scene];
         fn && fn(el, p);
       }
@@ -194,35 +195,43 @@
   addEventListener("scroll", tick, { passive: true });
 
   /* ---------------- Anatomy (exploded patio) ----------------
-     Choreography, driven 1:1 by scroll (s runs 0..6):
-       steps 0-4  each layer drops in from above, its shadow sharpening on the layer below;
-                  placed layers hover a few px apart, like an exploded product view
-       step 5     "The result": the gaps close, the stack locks, a light sweeps the pavers
-     The key (.spec) is a live index: the layer being placed is highlighted. */
+     Each layer is its own pre-rendered image, moved only with transform + opacity, so the
+     GPU composites it and nothing repaints while you scroll (smooth on iPhone).
+     Scroll sets a target; the drawn position glides toward it (critically damped), which
+     smooths out uneven touch-scroll events the way Apple's product pages feel.
+       steps 0-4  a layer drops in, its shadow sharpening on the layer below; placed
+                  layers hover a little apart, like an exploded product view
+       step 5     "The result": the gaps close, the stack locks, a light sweeps the pavers */
   const anatomy = $("[data-scene='anatomy']");
   if (anatomy) {
     const sec = anatomy.closest(".anatomy");
-    const svg = $(".iso-svg", anatomy);
-    const slabs = $$(".slab", anatomy);             // soil, fabric, gravel, sand, pavers
-    const hovers = $$(".hover", anatomy);           // shadows for layers 1..4
+    const layers = $$(".iso-l", anatomy);           // soil, fabric, gravel, sand, pavers
+    const hovers = $$(".iso-h", anatomy);           // drop shadows for layers 1..4
+    const slope = $(".iso-slope", anatomy);
+    const sheen = $(".iso-sheen", anatomy);
     const steps = $$(".a-step", anatomy);
     const rows = $$(".spec li", anatomy);
     const N = steps.length;                         // 6 steps
-    let last = -1;
+    const DROP = 24, GAP = 2;                       // % of the drawing's height
     const ease = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     const easeOut = (t) => 1 - Math.pow(1 - t, 3);
-    const apply = (s) => {
-      for (let i = 1; i < slabs.length; i++) {
-        const off = (1 - ease(clamp((s - i + 0.12) / 0.88))).toFixed(4);
-        slabs[i].style.setProperty("--off", off);
-        hovers[i - 1] && hovers[i - 1].style.setProperty("--off", off);
-      }
-      // exploded spacing while building, then everything locks together for the result
+    let last = -1, cur = 0, target = 0, raf = 0, prevT = 0, primed = false;
+    const lastF = [];
+    const draw = (s) => {
       const gapf = s < N - 1 ? 1 : 1 - easeOut(clamp((s - (N - 1)) / 0.55));
-      if (svg) {
-        svg.style.setProperty("--gapf", gapf.toFixed(4));
-        svg.style.setProperty("--drain", (1 - clamp((s - 0.75) / 0.25)).toFixed(3));
-      }
+      layers.forEach((el, i) => {
+        const t = i ? clamp((s - i) / 0.85) : 1;   // drop starts with its step, lands at 85% of it
+        const off = 1 - ease(t);
+        el.style.transform = `translate3d(0,${(-(off * DROP + gapf * i * GAP)).toFixed(3)}%,0)`;
+        el.style.opacity = i ? clamp(t / 0.07).toFixed(3) : "1";   // solid almost at once, like a real object
+        const h = hovers[i - 1];
+        if (h) {
+          const near = clamp(off * 30) * (1 - off) * 0.7, hang = gapf * 0.32 * (1 - off);
+          h.style.transform = `translate3d(0,${(-(gapf * (i - 1) * GAP)).toFixed(3)}%,0)`;
+          h.style.opacity = Math.max(near, hang).toFixed(3);
+        }
+      });
+      if (slope) slope.style.opacity = (1 - clamp((s - 0.75) / 0.25)).toFixed(3);
       const idx = Math.min(N - 1, Math.floor(s));
       if (idx !== last) {
         steps.forEach((st, i) => st.classList.toggle("is-on", i === idx));
@@ -234,10 +243,26 @@
         sec.classList.toggle("is-final", idx === N - 1);
         last = idx;
       }
-      rows.forEach((r) => r.style.setProperty("--f", clamp(s - +r.dataset.layer).toFixed(3)));
+      rows.forEach((r, j) => {
+        const f = clamp(s - +r.dataset.layer).toFixed(2);
+        if (lastF[j] !== f) { r.style.setProperty("--f", f); lastF[j] = f; }
+      });
     };
-    sceneHandlers.anatomy = (el, p) => apply(clamp(p * 1.08, 0, 1) * (N - 0.001));
-    apply(reduce ? N - 0.001 : 0);
+    const loop = (t) => {
+      const dt = prevT ? Math.min(64, t - prevT) : 16;
+      prevT = t;
+      cur += (target - cur) * (1 - Math.exp(-dt / 110));   // ~110 ms glide
+      if (Math.abs(target - cur) < 0.0008) cur = target;
+      draw(cur);
+      raf = cur === target ? 0 : requestAnimationFrame(loop);
+      if (!raf) prevT = 0;
+    };
+    sceneHandlers.anatomy = (el, p) => {
+      target = clamp(p * 1.08, 0, 1) * (N - 0.001);
+      if (!primed) { primed = true; cur = target; draw(cur); return; }   // arriving mid-scene: no fly-in
+      if (!raf) raf = requestAnimationFrame(loop);
+    };
+    draw(reduce ? N - 0.001 : 0);
   }
 
   /* ---------------- Work: cylinder carousel ---------------- */
