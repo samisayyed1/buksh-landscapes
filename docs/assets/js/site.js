@@ -193,34 +193,51 @@
   function tick() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
   addEventListener("scroll", tick, { passive: true });
 
-  /* ---------------- Anatomy (exploded patio) ---------------- */
+  /* ---------------- Anatomy (exploded patio) ----------------
+     Choreography, driven 1:1 by scroll (s runs 0..6):
+       steps 0-4  each layer drops in from above, its shadow sharpening on the layer below;
+                  placed layers hover a few px apart, like an exploded product view
+       step 5     "The result": the gaps close, the stack locks, a light sweeps the pavers
+     The key (.spec) is a live index: the layer being placed is highlighted. */
   const anatomy = $("[data-scene='anatomy']");
   if (anatomy) {
-    const slabs = $$(".slab", anatomy);           // soil, fabric, gravel, sand, pavers
+    const sec = anatomy.closest(".anatomy");
+    const svg = $(".iso-svg", anatomy);
+    const slabs = $$(".slab", anatomy);             // soil, fabric, gravel, sand, pavers
+    const hovers = $$(".hover", anatomy);           // shadows for layers 1..4
     const steps = $$(".a-step", anatomy);
-    const bars = $$(".a-progress i", anatomy);
-    const drain = $(".drain", anatomy);
+    const rows = $$(".spec li", anatomy);
     const N = steps.length;                         // 6 steps
     let last = -1;
     const ease = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
     const apply = (s) => {
-      // layers 1..4 drop in during steps 1..4
-      slabs.forEach((sl, i) => {
-        if (i === 0) return;
-        const t = clamp(s - i + 0.15, 0, 1);
-        sl.style.setProperty("--off", (1 - ease(t)).toFixed(4));
-        sl.style.setProperty("--lblo", (Math.floor(s) === i || s >= N - 1) ? 1 : 0);
-      });
-      slabs[0].style.setProperty("--lblo", (s < 1 || s >= N - 1) ? 1 : 0);
+      for (let i = 1; i < slabs.length; i++) {
+        const off = (1 - ease(clamp((s - i + 0.12) / 0.88))).toFixed(4);
+        slabs[i].style.setProperty("--off", off);
+        hovers[i - 1] && hovers[i - 1].style.setProperty("--off", off);
+      }
+      // exploded spacing while building, then everything locks together for the result
+      const gapf = s < N - 1 ? 1 : 1 - easeOut(clamp((s - (N - 1)) / 0.55));
+      if (svg) {
+        svg.style.setProperty("--gapf", gapf.toFixed(4));
+        svg.style.setProperty("--drain", (1 - clamp((s - 0.75) / 0.25)).toFixed(3));
+      }
       const idx = Math.min(N - 1, Math.floor(s));
-      if (idx !== last) { steps.forEach((st, i) => st.classList.toggle("is-on", i === idx)); last = idx; }
-      bars.forEach((b, i) => b.style.setProperty("--f", clamp(s - i).toFixed(3)));
-      drain && drain.style.setProperty("--drain", s < 1 ? 1 : 0);
-      anatomy.closest('.anatomy').classList.toggle("is-final", s >= N - 1);
+      if (idx !== last) {
+        steps.forEach((st, i) => st.classList.toggle("is-on", i === idx));
+        rows.forEach((r) => {
+          const k = +r.dataset.layer;
+          r.classList.toggle("is-on", k === idx);
+          r.classList.toggle("is-done", k < idx);
+        });
+        sec.classList.toggle("is-final", idx === N - 1);
+        last = idx;
+      }
+      rows.forEach((r) => r.style.setProperty("--f", clamp(s - +r.dataset.layer).toFixed(3)));
     };
     sceneHandlers.anatomy = (el, p) => apply(clamp(p * 1.08, 0, 1) * (N - 0.001));
     apply(reduce ? N - 0.001 : 0);
-
   }
 
   /* ---------------- Work: cylinder carousel ---------------- */

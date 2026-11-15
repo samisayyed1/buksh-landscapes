@@ -382,31 +382,53 @@ p + p { margin-top: 1em; }
 .a-step .mono { font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: var(--aspen-2); }
 .a-step h3 { font: 800 clamp(1.15rem, 2vw, 1.5rem)/1.1 var(--f-display); font-variation-settings: "wdth" 112; margin: 6px 0 6px; }
 .a-step p { color: #b7c8be; font-size: .98rem; line-height: 1.5; }
-.a-progress { display: flex; gap: 6px; margin-top: 10px; }
-.a-progress i { height: 3px; flex: 1; max-width: 46px; background: rgba(255, 255, 255, .16); border-radius: 2px; overflow: hidden; position: relative; }
-.a-progress i::after { content: ""; position: absolute; inset: 0; background: var(--aspen); transform: scaleX(var(--f, 0)); transform-origin: left; }
-.a-note { margin-top: 10px; font-size: .78rem; color: #a4b8ad; max-width: 48ch; }
+.a-note { margin-top: 14px; font-size: .76rem; color: #8fa69a; max-width: 48ch; }
 
-.iso-stage { position: relative; display: grid; place-items: center; min-height: 0; }
-/* The stack is a plain 2D isometric SVG: no CSS 3D, so iOS Safari renders it exactly like
-   Chrome. Each layer is a <g class="slab"> that drops in from above as --off goes 1 -> 0.
-   The SVG's viewBox scales it to fit whatever space the stage has. */
+/* Live spec index: the key doubles as progress. Upcoming layers are dim, the one being
+   placed is lit with a gold rule that fills as you scroll, placed ones settle back. */
+.spec { margin-top: 22px; max-width: 440px; border-top: 1px solid rgba(255, 255, 255, .09); }
+.spec li {
+  position: relative; display: grid; grid-template-columns: 20px minmax(0, 1fr) auto; align-items: center; gap: 14px;
+  padding: 11px 2px 11px 14px; border-bottom: 1px solid rgba(255, 255, 255, .09);
+  opacity: .34; transition: opacity .6s var(--ease-out);
+}
+.spec li::before { content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 2px; border-radius: 2px; background: var(--aspen); transform: scaleY(0); transition: transform .5s var(--ease-out); }
+.spec .sw { width: 18px; height: 20px; filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .35)); transition: transform .6s var(--ease-out); }
+.spec-n { font: 600 .95rem/1.2 var(--f-body); color: #eef4f0; letter-spacing: -.005em; }
+.spec-v { font: 500 .66rem/1 var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: #8fa69a; white-space: nowrap; transition: color .4s; }
+.spec-bar { position: absolute; left: 14px; right: 0; bottom: -1px; height: 1px; background: linear-gradient(90deg, var(--aspen), var(--aspen-2)); transform: scaleX(var(--f, 0)); transform-origin: left; opacity: 0; transition: opacity .4s; }
+.spec li.is-done { opacity: .72; }
+.spec li.is-on { opacity: 1; }
+.spec li.is-on::before { transform: scaleY(1); }
+.spec li.is-on .spec-v { color: var(--aspen-2); }
+.spec li.is-on .spec-bar { opacity: 1; }
+.spec li.is-on .sw { transform: translateY(-1px) scale(1.12); }
+.anatomy.is-final .spec li { opacity: 1; }
+.anatomy.is-final .spec .spec-v { color: #cfdcd4; }
+
+.iso-stage { position: relative; min-height: 0; }
+.iso-stage::before { content: ""; position: absolute; left: 50%; top: 55%; width: min(90%, 620px); aspect-ratio: 1.6; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(127, 166, 90, .2), rgba(127, 166, 90, 0)); pointer-events: none; }
+/* The stack is a 2D isometric SVG (no CSS 3D, so iOS Safari matches Chrome). Its viewBox
+   scales it into whatever space the stage has. Layers are <g class="slab"> groups:
+   --off 1 -> 0 drops a layer in; --gapf 1 -> 0 closes the exploded spacing. */
 .iso-svg { position: absolute; left: 0; right: 0; top: var(--iso-top, 0px); bottom: var(--iso-bot, 0px); width: 100%; height: calc(100% - var(--iso-top, 0px) - var(--iso-bot, 0px)); display: block; overflow: visible; }
-.iso-svg .slab { transform: translateY(calc(var(--off, 0) * -150px)); opacity: clamp(0, calc(1 - var(--off, 0) * 1.6), 1); }
-.iso-svg .drain { opacity: var(--drain, 0); transition: opacity .5s; }
-.iso-svg .drain line { stroke: #8fd0ff; stroke-width: 3; stroke-linecap: round; animation: drip 1.6s linear infinite; }
-@keyframes drip { from { transform: translate(0, 0); opacity: 0; } 25% { opacity: 1; } to { transform: translate(-22px, 13px); opacity: 0; } }
-.iso-legend { position: relative; z-index: 2; display: grid; gap: 6px; font: 500 .7rem/1.25 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: #dbe6df; background: rgba(8, 25, 20, .72); border: 1px solid rgba(255, 255, 255, .12); border-radius: 12px; padding: 12px 14px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); opacity: 0; transform: translateY(10px); transition: opacity .5s var(--ease-out), transform .6s var(--ease-out); pointer-events: none; max-width: 92%; }
-.iso-legend li { display: flex; gap: 10px; align-items: center; }
-.iso-legend i { width: 12px; height: 12px; border-radius: 3px; flex: none; box-shadow: inset 0 0 0 1px rgba(255,255,255,.2); }
-.anatomy.is-final .iso-legend { opacity: 1; transform: none; }
+.iso-svg .slab { transform: translateY(calc(var(--off, 0) * -170px - var(--gapf, 0) * var(--k, 0) * 10px)); opacity: clamp(0, calc(1 - var(--off, 0) * 1.4), 1); }
+.iso-svg .hover { transform: translateY(calc(var(--gapf, 0) * (var(--k, 1) - 1) * -10px)); opacity: max(calc(clamp(0, calc(var(--off, 0) * 30), 1) * (1 - var(--off, 0)) * .7), calc(var(--gapf, 0) * .32 * (1 - var(--off, 0)))); }
+.iso-svg .ao { opacity: calc(1 - var(--gapf, 0)); }
+.iso-svg .slope, .iso-svg .drain { opacity: var(--drain, 0); }
+.iso-svg .drain line { stroke: #9fd6ff; stroke-width: 2.6; stroke-linecap: round; animation: drip 1.7s cubic-bezier(.4, 0, .6, 1) infinite; }
+@keyframes drip { from { transform: translate(0, 0); opacity: 0; } 25% { opacity: .9; } to { transform: translate(26px, 15px); opacity: 0; } }
+.iso-svg .sheen-r { transform: translateX(-60px); }
+.anatomy.is-final .iso-svg .sheen-r { animation: sheen 1.5s .35s cubic-bezier(.25, .7, .25, 1) both; }
+@keyframes sheen { from { transform: translateX(-60px); } to { transform: translateX(640px); } }
 
 @media (min-width: 1000px) {
-  .anatomy-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); grid-template-rows: 1fr; align-items: center; gap: 40px; padding-top: var(--header-h); }
-  .anatomy-steps { margin-top: 28px; }
-  .anatomy-grid { gap: 56px; }
-  .iso-stage { grid-column: 2; grid-row: 1; align-self: stretch; --iso-top: 14vh; --iso-bot: 20vh; }
-  .iso-legend { grid-column: 2; grid-row: 1; align-self: end; justify-self: end; margin-bottom: 7vh; }
+  .anatomy-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); grid-template-rows: 1fr; align-items: center; gap: 56px; padding-top: var(--header-h); }
+  .anatomy-steps { margin-top: 26px; }
+  .iso-stage { align-self: stretch; --iso-top: 8vh; --iso-bot: 9vh; }
+}
+@media (min-width: 1000px) and (max-height: 860px) {
+  .anatomy-copy .lede { display: none; }
 }
 @media (max-width: 999px) {
   .anatomy-copy .lede { display: none; }
@@ -776,13 +798,16 @@ a.c-card:hover { background: rgba(255, 255, 255, .12); }
   .js .anatomy-scene { height: auto; }
   .js .anatomy-sticky { position: relative; height: auto; padding-block: 60px; }
   .js .a-step { grid-area: auto; position: relative; opacity: 1; transform: none; margin-bottom: 14px; }
-  .a-progress { display: none; }
-  .slab { --off: 0 !important; }
-  .iso-legend { opacity: 1; transform: none; }
+  .slab, .hover { --off: 0 !important; }
+  .iso-svg { --gapf: 0 !important; }
+  .spec li { opacity: 1; }
+  .iso-stage { min-height: min(80vw, 480px); }
+  .js .anatomy-sticky { height: auto !important; }
+  .anatomy-grid { grid-template-rows: auto auto !important; }
 }
-html:not(.js) .slab { --off: 0 !important; }
-html:not(.js) .iso-legend { opacity: 1; transform: none; }
-html:not(.js) .a-progress { display: none; }
+html:not(.js) .iso-stage { min-height: min(80vw, 480px); }
+html:not(.js) .slab, html:not(.js) .hover { --off: 0 !important; }
+html:not(.js) .spec li { opacity: 1; }
 .q-done-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center; margin-top: 22px; }
 .q-done-actions .btn { margin-top: 0; }
 .q-summary { text-align: left; white-space: pre-wrap; font: .82rem/1.5 var(--f-mono); background: var(--frost); border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-top: 16px; max-height: 260px; overflow: auto; }
@@ -813,34 +838,42 @@ html:not(.js) .a-progress { display: none; }
 @keyframes drift { from { translate: 0 0; } to { translate: -3% -2%; } }
 @media (max-width: 699px) and (prefers-reduced-motion: reduce) { .hero-media img { animation: none; } }
 
-/* MOBILE ANATOMY — copy, stage and legend each own a row. JS scales and centres the
-   assembled stack inside the stage, and layers fade in from above, so nothing ever
-   crosses into the text. */
+/* MOBILE ANATOMY — copy + live key on top, the drawing fills the rest. The SVG scales
+   itself into the stage, and layers fade in from above, so nothing crosses the text. */
 @media (max-width: 999px) {
   .js .anatomy-sticky { height: 100svh; grid-template-rows: minmax(0, 1fr); }
-  .anatomy-grid { grid-template-rows: auto minmax(0, 1fr) auto; min-height: 0; padding-bottom: calc(var(--bar-h) + 10px); }
+  .anatomy-grid { grid-template-rows: auto minmax(0, 1fr); min-height: 0; padding-bottom: calc(var(--bar-h) + 6px); }
   .anatomy-copy .h2 { font-size: clamp(1.5rem, 6.6vw, 2.2rem); }
   .a-note { display: none; }
   .a-step h3 { font-size: 1.08rem; margin: 4px 0; }
   .a-step p { font-size: .88rem; line-height: 1.45; }
-  .a-progress { margin-top: 14px; }
-  .iso-stage { overflow: hidden; --iso-top: 18px; --iso-bot: 8px; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 18px); mask-image: linear-gradient(180deg, transparent 0, #000 18px); }
-  .iso-stage::before { width: 90%; }
-  .iso-legend { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 7px 14px; font-size: .6rem; letter-spacing: .05em; padding: 11px 13px; opacity: 0; transform: none; max-width: none; }
-  .anatomy.is-final .iso-legend { opacity: 1; transform: none; }
-  .iso-legend li { white-space: nowrap; }
-  .iso-legend li:nth-child(3) { grid-column: 1 / -1; }
+  /* the key becomes a compact progress strip: one swatch per layer, the active one opens
+     into a chip with its name and spec; builds left to right like the stack builds up */
+  .spec { position: relative; display: flex; flex-direction: row-reverse; justify-content: flex-end; align-items: center; gap: 7px; margin-top: 16px; padding-bottom: 24px; max-width: none; border: 0; }
+  .spec li { position: static; display: grid; place-items: center; width: 34px; height: 34px; padding: 0; border: 1px solid rgba(255, 255, 255, .1); border-radius: 50%; background: rgba(255, 255, 255, .03); opacity: .38; transition: opacity .5s var(--ease-out), background-color .4s, border-color .4s, box-shadow .4s; }
+  .spec li::before, .spec-bar, .spec-v { display: none; }
+  .spec .sw { width: 15px; height: 17px; }
+  /* caption under the strip: the active layer's name and spec, one line, never truncated */
+  .spec-n { display: block; position: absolute; left: 0; bottom: 0; font: 500 .64rem/1 var(--f-mono); letter-spacing: .13em; text-transform: uppercase; color: var(--aspen-2); white-space: nowrap; opacity: 0; transform: translateY(4px); transition: opacity .35s var(--ease-out), transform .45s var(--ease-out); }
+  .spec-n::after { content: "  ·  " attr(data-v); color: #9fb4a8; }
+  .spec li.is-done { opacity: .8; }
+  .spec li.is-on { opacity: 1; border-color: rgba(233, 178, 60, .7); background: rgba(233, 178, 60, .1); box-shadow: 0 0 0 4px rgba(233, 178, 60, .08); }
+  .spec li.is-on .spec-n { opacity: 1; transform: none; }
+  .spec li.is-on .sw { transform: scale(1.1); }
+  .anatomy.is-final .spec li { border-color: rgba(255, 255, 255, .18); }
+  .anatomy.is-final .spec::after { content: "Locked & level"; position: absolute; left: 0; bottom: 0; font: 500 .64rem/1 var(--f-mono); letter-spacing: .13em; text-transform: uppercase; color: var(--aspen-2); }
+  .iso-stage { overflow: hidden; --iso-top: 14px; --iso-bot: 2px; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 16px); mask-image: linear-gradient(180deg, transparent 0, #000 16px); }
 }
-@media (max-width: 999px) and (max-height: 720px) {
+@media (max-width: 999px) and (max-height: 760px) {
   .anatomy-grid { padding-top: calc(var(--header-h) + 2px); }
-  .anatomy-copy .kicker { font-size: .68rem; }
-  .anatomy-copy .h2 { font-size: 1.4rem; margin-top: 8px !important; }
+  .anatomy-copy .kicker { font-size: .66rem; }
+  .anatomy-copy .h2 { font-size: 1.36rem; margin-top: 6px !important; }
   .js .anatomy-steps { margin-top: 6px; }
-  .a-step .mono { font-size: .66rem; }
+  .a-step .mono { font-size: .64rem; }
   .a-step h3 { font-size: 1rem; }
-  .a-step p { font-size: .82rem; line-height: 1.4; }
-  .a-progress { margin-top: 10px; }
-  .iso-legend { gap: 5px 12px; padding: 9px 11px; font-size: .56rem; }
+  .a-step p { font-size: .8rem; line-height: 1.38; }
+  .spec { margin-top: 10px; padding-bottom: 20px; }
+  .spec li { width: 30px; height: 30px; }
 }
 @media (max-width: 699px) {
   .hero h1 { text-shadow: none; }
