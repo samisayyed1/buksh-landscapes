@@ -21,6 +21,10 @@ cd docs && python3 -m http.server 8765   # preview at http://localhost:8765
 3. **Reviews.** No customer reviews are shown because none could be verified publicly. Add real Google reviews (with permission) to the homepage proof strip when available.
 4. **Facts to confirm with the owner:** BBB A+ rating, "since 2017", 20+ years combined experience, warranty terms (copied from the current site's FAQ), typical base depths in the patio cross-section.
 
+## Photo credits
+
+Every photo is Buksh's own work except the homepage hero (`garden-path-night`, also used in `og-image.jpg`): "Beautifully lit garden path" by Cee on Unsplash (https://unsplash.com/photos/R_c77Rx9UzM), free under the Unsplash License (commercial use OK, no attribution required). Swap it for a strong night shot of a real Buksh build when one exists. The gallery stays 100% Buksh work.
+
 ## Motion
 
 Scroll-linked 3D (depth-zoom hero, pinned exploded patio cross-section, curved photo wall, 3D card rise, perspective text) runs from one passive scroll listener + one `requestAnimationFrame`, writing CSS custom properties only for on-screen elements. Rotations are capped at roughly 15° and zoom deltas at roughly 0.2. `prefers-reduced-motion` turns all of it off. On phones the photo wall becomes a native swipe carousel.

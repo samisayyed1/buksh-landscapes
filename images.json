@@ -1,4 +1,30 @@
 {
+ "garden-path-night": {
+  "w": 3840,
+  "h": 2160,
+  "widths": [
+   640,
+   1280,
+   1920,
+   2560,
+   3200,
+   3840
+  ],
+  "cat": "none",
+  "alt": "Curved paver garden path lit by low path lights at night, lined with blooming hyacinths"
+ },
+ "garden-path-night-portrait": {
+  "w": 1620,
+  "h": 2160,
+  "widths": [
+   640,
+   960,
+   1280,
+   1620
+  ],
+  "cat": "none",
+  "alt": "Curved paver garden path lit by low path lights at night, lined with blooming hyacinths"
+ },
  "aerial-modern-build": {
   "w": 3840,
   "h": 2160,
@@ -718,17 +744,5 @@
    3200,
    3840
   ]
- },
- "aerial-hero-portrait": {
-  "w": 1620,
-  "h": 2160,
-  "widths": [
-   640,
-   960,
-   1280,
-   1620
-  ],
-  "cat": "none",
-  "alt": "Aerial view of a finished Buksh Landscapes front yard: modern home, new lawn and geometric concrete walkways"
  }
 }

@@ -23,8 +23,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=swap">
-<link rel="preload" as="image" media="(max-width: 699px)" imagesrcset="./assets/img/aerial-hero-portrait-640.webp 640w, ./assets/img/aerial-hero-portrait-960.webp 960w, ./assets/img/aerial-hero-portrait-1280.webp 1280w, ./assets/img/aerial-hero-portrait-1620.webp 1620w" imagesizes="100vw" fetchpriority="high">
-<link rel="preload" as="image" media="(min-width: 700px)" imagesrcset="./assets/img/aerial-modern-build-640.webp 640w, ./assets/img/aerial-modern-build-1280.webp 1280w, ./assets/img/aerial-modern-build-1920.webp 1920w, ./assets/img/aerial-modern-build-2560.webp 2560w, ./assets/img/aerial-modern-build-3200.webp 3200w, ./assets/img/aerial-modern-build-3840.webp 3840w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" media="(max-width: 699px)" imagesrcset="./assets/img/garden-path-night-portrait-640.webp 640w, ./assets/img/garden-path-night-portrait-960.webp 960w, ./assets/img/garden-path-night-portrait-1280.webp 1280w, ./assets/img/garden-path-night-portrait-1620.webp 1620w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" media="(min-width: 700px)" imagesrcset="./assets/img/garden-path-night-640.webp 640w, ./assets/img/garden-path-night-1280.webp 1280w, ./assets/img/garden-path-night-1920.webp 1920w, ./assets/img/garden-path-night-2560.webp 2560w, ./assets/img/garden-path-night-3200.webp 3200w, ./assets/img/garden-path-night-3840.webp 3840w" imagesizes="100vw" fetchpriority="high">
 <link rel="stylesheet" href="./assets/css/site.css">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
@@ -130,7 +130,7 @@
 <main id="main">
 
 <section class="hero" data-p="exit" aria-labelledby="hero-h">
-  <div class="hero-media"><picture><source media="(max-width: 699px)" srcset="./assets/img/aerial-hero-portrait-640.webp 640w, ./assets/img/aerial-hero-portrait-960.webp 960w, ./assets/img/aerial-hero-portrait-1280.webp 1280w, ./assets/img/aerial-hero-portrait-1620.webp 1620w" sizes="100vw" width="1620" height="2160"><img src="./assets/img/aerial-modern-build-1280.webp" srcset="./assets/img/aerial-modern-build-640.webp 640w, ./assets/img/aerial-modern-build-1280.webp 1280w, ./assets/img/aerial-modern-build-1920.webp 1920w, ./assets/img/aerial-modern-build-2560.webp 2560w, ./assets/img/aerial-modern-build-3200.webp 3200w, ./assets/img/aerial-modern-build-3840.webp 3840w" sizes="100vw" width="3840" height="2160" alt="Aerial view of a finished Buksh Landscapes front yard with geometric concrete walks, lawn and planting beds" loading="eager" decoding="async" fetchpriority="high"></picture></div>
+  <div class="hero-media"><picture><source media="(max-width: 699px)" srcset="./assets/img/garden-path-night-portrait-640.webp 640w, ./assets/img/garden-path-night-portrait-960.webp 960w, ./assets/img/garden-path-night-portrait-1280.webp 1280w, ./assets/img/garden-path-night-portrait-1620.webp 1620w" sizes="100vw" width="1620" height="2160"><img src="./assets/img/garden-path-night-1280.webp" srcset="./assets/img/garden-path-night-640.webp 640w, ./assets/img/garden-path-night-1280.webp 1280w, ./assets/img/garden-path-night-1920.webp 1920w, ./assets/img/garden-path-night-2560.webp 2560w, ./assets/img/garden-path-night-3200.webp 3200w, ./assets/img/garden-path-night-3840.webp 3840w" sizes="100vw" width="3840" height="2160" alt="Curved paver garden path lit by low path lights at night, lined with blooming hyacinths" loading="eager" decoding="async" fetchpriority="high"></picture></div>
   <div class="hero-in">
     <div class="wrap hero-grid">
       <div>
@@ -142,12 +142,21 @@
         </div>
         <p class="hero-note"><span><svg class="i"><use href="#i-check"/></svg>Free on-site estimates</span><span><svg class="i"><use href="#i-check"/></svg>Financing through Financeit</span><span><svg class="i"><use href="#i-check"/></svg>Open 7 days</span></p>
       </div>
-      <aside class="season" aria-label="Edmonton landscaping season">
-        <div class="season-top"><span>Edmonton season</span><b data-dial-now>Build season</b></div>
-        <div class="months" data-months aria-hidden="true"></div>
-        <div class="season-legend"><span><i style="background:rgba(127,166,90,.8)"></i>Building</span><span><i style="background:rgba(233,178,60,.6)"></i>Shoulder</span><span><i style="background:rgba(214,233,247,.4)"></i>Snow</span></div>
-        <p class="season-msg" data-dial-msg>Book a site visit and we'll give you a written estimate and a start date.</p>
-      </aside>
+      <aside class="season" aria-label="Edmonton landscaping season" data-season-card>
+          <div class="season-top">
+            <span class="season-k">Edmonton season</span>
+            <span class="season-pill" data-dial-now>Build season</span>
+          </div>
+          <div class="season-track" data-months aria-hidden="true"></div>
+          <div class="season-body">
+            <p class="season-h" data-dial-h>Book a site visit.</p>
+            <p class="season-msg" data-dial-msg>We'll give you a written estimate and a start date.</p>
+          </div>
+          <div class="season-foot">
+            <span class="season-count" data-dial-count></span>
+            <a class="season-link" href="#quote">Book a design visit <svg class="i"><use href="#i-arrow"/></svg></a>
+          </div>
+        </aside>
     </div>
   </div>
 </section>
@@ -210,22 +219,22 @@
           <p class="a-note">Depths shown are typical for a residential patio. Yours are set at the site visit, based on soil and use.</p>
         </div>
         <div class="iso-stage" aria-hidden="true">
-          <div class="iso">
+          <div class="iso-view"><div class="iso">
             <div class="slab s-soil"><div class="top"></div><div class="front"></div><div class="back"></div><div class="side"></div><div class="side l"></div><span class="lbl">Subgrade · sloped 2%</span></div>
             <div class="slab s-fab" style="--off:1"><div class="top"></div><div class="front"></div><div class="back"></div><div class="side"></div><div class="side l"></div><span class="lbl">Geotextile fabric</span></div>
             <div class="slab s-grav" style="--off:1"><div class="top"></div><div class="front"></div><div class="back"></div><div class="side"></div><div class="side l"></div><span class="lbl">Crushed base · 150–200 mm</span></div>
             <div class="slab s-sand" style="--off:1"><div class="top"></div><div class="front"></div><div class="back"></div><div class="side"></div><div class="side l"></div><span class="lbl">Bedding · 25 mm</span></div>
             <div class="slab s-pav" style="--off:1"><div class="top"></div><div class="front"></div><div class="back"></div><div class="side"></div><div class="side l"></div><span class="lbl">Pavers + edge restraint</span></div>
             <div class="drain"><i></i><i></i><i></i><i></i></div>
-          </div>
-          <ul class="iso-legend">
+          </div></div>
+        </div>
+        <ul class="iso-legend" aria-hidden="true">
             <li><i style="background:#9aa09b"></i>Pavers + joint sand</li>
             <li><i style="background:#d2b987"></i>Bedding · 25 mm</li>
             <li><i style="background:#8b918b"></i>Crushed base · 150–200 mm</li>
             <li><i style="background:#e7ece8"></i>Geotextile fabric</li>
             <li><i style="background:#6d4c35"></i>Subgrade, sloped to drain</li>
           </ul>
-        </div>
       </div>
     </div>
   </div>

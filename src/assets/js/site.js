@@ -45,13 +45,43 @@
     const l = $("[data-season-link]", bar);
     if (l) l.firstChild.textContent = (innerWidth < 700 ? "Book" : MSG.link[season]) + " ";
   }
+  /* Hero season card: a year timeline with a "today" needle */
+  const day = (() => { try { return +new Intl.DateTimeFormat("en-CA", { timeZone: "America/Edmonton", day: "numeric" }).format(now); } catch (e) { return now.getDate(); } })();
+  const dim = new Date(y, m + 1, 0).getDate();
+  const yearPos = (m + (day - 0.5) / dim) / 12;            // 0..1 across Jan..Dec
+  const monthNames = ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"];
   $$("[data-months]").forEach((el) => {
-    const names = ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"];
-    const kind = (i) => (i >= 4 && i <= 8 ? "m-build" : i === 3 || i === 9 ? "m-shoulder" : "m-snow");
-    el.innerHTML = names.map((n, i) => `<span class="${kind(i)}${i === m ? " is-now" : ""}"${i === m ? ' aria-current="date"' : ""}>${n}</span>`).join("");
+    el.innerHTML =
+      `<div class="st-bar"><i class="st-shoulder" style="left:${3 / 12 * 100}%;width:${100 / 12}%"></i><i class="st-build" style="left:${4 / 12 * 100}%;width:${5 / 12 * 100}%"><span>Build season</span></i><i class="st-shoulder" style="left:${9 / 12 * 100}%;width:${100 / 12}%"></i>` +
+      `<b class="st-now" style="left:${(yearPos * 100).toFixed(2)}%"><em>Today</em></b></div>` +
+      `<div class="st-months">${monthNames.map((n, i) => `<span${i === m ? ' class="is-now"' : ""}>${n}</span>`).join("")}</div>`;
   });
-  $$("[data-dial-msg]").forEach((el) => (el.textContent = MSG.dial[season]));
-  $$("[data-dial-now]").forEach((el) => (el.textContent = new Date(y, m, 1).toLocaleDateString("en-CA", { month: "long" }) + " · " + { snow: "Snow season", shoulder: "Shoulder season", build: "Build season" }[season]));
+  const HEAD = {
+    snow: m <= 1 || m >= 10 ? `Spring ${springYear} is booking now.` : "Thaw is weeks away.",
+    shoulder: m === 3 ? "The ground is opening up." : "Last weeks before freeze-up.",
+    build: "Peak build season.",
+  };
+  const BODY = {
+    snow: m <= 1 || m >= 10
+      ? "Crews are clearing commercial lots while we design spring builds. A visit this winter puts you first in line when the ground thaws."
+      : `Yards designed now are the first ones built in ${springYear}. Lock in an early start date.`,
+    shoulder: m === 3 ? "Spring cleanups are underway and the first installs are starting. Book now for an early-season start." : "Final installs and fall cleanups are wrapping up. Book a fall install or a spring design visit.",
+    build: "Crews are installing across Edmonton. Book a site visit for a written estimate and a start date.",
+  };
+  const countText = (() => {
+    const today = new Date(y, m, day);
+    const weeks = (to) => Math.max(1, Math.round((to - today) / 6048e5));
+    if (season === "build") return `<b>${weeks(new Date(y, 9, 1))} weeks</b> of build season left`;
+    if (m === 9) return `<b>${weeks(new Date(y, 10, 1))} weeks</b> until freeze-up`;
+    return `Build season opens in <b>${weeks(new Date(m >= 4 ? y + 1 : y, 4, 1))} weeks</b>`;
+  })();
+  $$("[data-dial-h]").forEach((el) => (el.textContent = HEAD[season]));
+  $$("[data-dial-msg]").forEach((el) => (el.textContent = BODY[season]));
+  $$("[data-dial-count]").forEach((el) => (el.innerHTML = countText));
+  $$("[data-dial-now]").forEach((el) => {
+    el.textContent = new Date(y, m, 1).toLocaleDateString("en-CA", { month: "long" }) + " · " + { snow: "Snow season", shoulder: "Shoulder season", build: "Build season" }[season];
+    el.dataset.season = season;
+  });
 
   /* Phone hours (Edmonton time) */
   try {
@@ -190,6 +220,47 @@
     };
     sceneHandlers.anatomy = (el, p) => apply(clamp(p * 1.08, 0, 1) * (N - 0.001));
     apply(reduce ? N - 0.001 : 0);
+
+    /* Fit: scale + centre the assembled stack inside its own stage so it can never
+       run into the copy above or the legend below, whatever the phone size. */
+    const stage = $(".iso-stage", anatomy), view = $(".iso-view", anatomy), iso = $(".iso", anatomy);
+    const faces = $$(".slab > div", anatomy);
+    const sec = anatomy.closest(".anatomy");
+    const fit = () => {
+      if (!stage || !view) return;
+      view.style.setProperty("--fs", 1); view.style.setProperty("--fx", "0px"); view.style.setProperty("--fy", "0px");
+      if (innerWidth >= 1000) return;               // desktop layout is sized by CSS
+      sec.classList.add("is-measuring");
+      let U = null;
+      for (const pv of [0, 1]) {
+        iso.style.setProperty("--p", pv);
+        for (const f of faces) {
+          const r = f.getBoundingClientRect();
+          if (!r.width && !r.height) continue;
+          U = U ? { l: Math.min(U.l, r.left), t: Math.min(U.t, r.top), r: Math.max(U.r, r.right), b: Math.max(U.b, r.bottom) } : { l: r.left, t: r.top, r: r.right, b: r.bottom };
+        }
+      }
+      iso.style.removeProperty("--p");
+      sec.classList.remove("is-measuring");
+      const R = stage.getBoundingClientRect(), V = view.getBoundingClientRect();
+      if (!U || R.height < 40) return;
+      const small = innerWidth < 1000;
+      const pad = small ? { t: 30, b: 14, x: 10 } : { t: 40, b: 40, x: 20 };
+      const aw = R.width - pad.x * 2, ah = R.height - pad.t - pad.b;
+      const s = Math.min(small ? 1.25 : 1, aw / (U.r - U.l), ah / (U.b - U.t));
+      const cx = V.left + V.width / 2, cy = V.top + V.height / 2;
+      const ux = (U.l + U.r) / 2, uy = (U.t + U.b) / 2;
+      const ax = R.left + pad.x + aw / 2, ay = R.top + pad.t + ah / 2;
+      view.style.setProperty("--fs", s.toFixed(4));
+      view.style.setProperty("--fx", (ax - cx - s * (ux - cx)).toFixed(1) + "px");
+      view.style.setProperty("--fy", (ay - cy - s * (uy - cy)).toFixed(1) + "px");
+    };
+    let fitT;
+    const refit = () => { clearTimeout(fitT); fitT = setTimeout(fit, 120); };
+    fit();
+    addEventListener("resize", refit, { passive: true });
+    addEventListener("load", fit);
+    document.fonts && document.fonts.ready.then(fit);
   }
 
   /* ---------------- Work: cylinder carousel ---------------- */
