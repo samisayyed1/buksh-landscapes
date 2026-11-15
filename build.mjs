@@ -2,6 +2,7 @@
 // Usage: node build.mjs
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, cpSync, rmSync, existsSync } from "node:fs";
 import { join, dirname, relative } from "node:path";
+import { createHash } from "node:crypto";
 
 const SITE = {
   name: "Buksh Landscapes",
@@ -14,6 +15,9 @@ const SITE = {
 };
 
 const SRC = "src", OUT = "docs";
+// Content hashes for cache-busting: a changed file gets a new URL, so phones never mix new HTML with stale CSS/JS.
+const ver = (f) => createHash("sha1").update(readFileSync(join(SRC, f))).digest("hex").slice(0, 10);
+const ASSET_V = { cssV: ver("assets/css/site.css"), jsV: ver("assets/js/site.js") };
 const images = JSON.parse(readFileSync("images.json", "utf8"));
 const layout = readFileSync(join(SRC, "layout.html"), "utf8");
 const partials = Object.fromEntries(
@@ -87,6 +91,7 @@ for (const file of pages) {
   const pathUrl = rel.replace(/index\.html$/, "");
   const vars = {
     ...SITE,
+    ...ASSET_V,
     root,
     title: meta.title || SITE.name,
     description: meta.description || "",

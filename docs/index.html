@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=swap">
 <link rel="preload" as="image" media="(max-width: 699px)" imagesrcset="./assets/img/garden-path-night-portrait-640.webp 640w, ./assets/img/garden-path-night-portrait-960.webp 960w, ./assets/img/garden-path-night-portrait-1280.webp 1280w, ./assets/img/garden-path-night-portrait-1620.webp 1620w" imagesizes="100vw" fetchpriority="high">
 <link rel="preload" as="image" media="(min-width: 700px)" imagesrcset="./assets/img/garden-path-night-640.webp 640w, ./assets/img/garden-path-night-1280.webp 1280w, ./assets/img/garden-path-night-1920.webp 1920w, ./assets/img/garden-path-night-2560.webp 2560w, ./assets/img/garden-path-night-3200.webp 3200w, ./assets/img/garden-path-night-3840.webp 3840w" imagesizes="100vw" fetchpriority="high">
-<link rel="stylesheet" href="./assets/css/site.css">
+<link rel="stylesheet" href="./assets/css/site.css?v=7af66a9d3f">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
 {
@@ -218,15 +218,28 @@
           <div class="a-progress" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
           <p class="a-note">Depths shown are typical for a residential patio. Yours are set at the site visit, based on soil and use.</p>
         </div>
-        <div class="iso-stage" aria-hidden="true">
-          <div class="iso-view"><div class="iso">
-            <div class="slab s-soil"><div class="top"></div><div class="front"></div><div class="back"></div><div class="side"></div><div class="side l"></div><span class="lbl">Subgrade · sloped 2%</span></div>
-            <div class="slab s-fab" style="--off:1"><div class="top"></div><div class="front"></div><div class="back"></div><div class="side"></div><div class="side l"></div><span class="lbl">Geotextile fabric</span></div>
-            <div class="slab s-grav" style="--off:1"><div class="top"></div><div class="front"></div><div class="back"></div><div class="side"></div><div class="side l"></div><span class="lbl">Crushed base · 150–200 mm</span></div>
-            <div class="slab s-sand" style="--off:1"><div class="top"></div><div class="front"></div><div class="back"></div><div class="side"></div><div class="side l"></div><span class="lbl">Bedding · 25 mm</span></div>
-            <div class="slab s-pav" style="--off:1"><div class="top"></div><div class="front"></div><div class="back"></div><div class="side"></div><div class="side l"></div><span class="lbl">Pavers + edge restraint</span></div>
-            <div class="drain"><i></i><i></i><i></i><i></i></div>
-          </div></div>
+        <div class="iso-stage">
+          <svg class="iso-svg" viewBox="0 0 500 486" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Cross-section of a Buksh paver patio: subgrade, geotextile, compacted base, bedding sand and pavers">
+          <defs>
+          <pattern id="p-soil" width="9" height="9" patternUnits="userSpaceOnUse"><rect width="9" height="9" fill="#6e4b33"/><circle cx="2" cy="3" r="1" fill="#82593d"/><circle cx="6.5" cy="7" r=".9" fill="#5a3d2a"/></pattern>
+          <pattern id="p-soil-l" width="10" height="7" patternUnits="userSpaceOnUse"><rect width="10" height="7" fill="#5a3e2b"/><rect y="4.5" width="10" height="2.5" fill="#4e3524"/></pattern>
+          <pattern id="p-soil-r" width="10" height="7" patternUnits="userSpaceOnUse"><rect width="10" height="7" fill="#48311f"/><rect y="4.5" width="10" height="2.5" fill="#3d2a1b"/></pattern>
+          <pattern id="p-fab" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><rect width="5" height="5" fill="#e7ece8"/><rect width="2.2" height="5" fill="#f6f8f6"/></pattern>
+          <pattern id="p-grav" width="9" height="8" patternUnits="userSpaceOnUse"><rect width="9" height="8" fill="#8b918b"/><circle cx="2" cy="2" r="1.9" fill="#a7aca6"/><circle cx="6.5" cy="5.5" r="1.6" fill="#6e746e"/><circle cx="6" cy="1.5" r=".9" fill="#c9cdc7"/><circle cx="2.5" cy="6.5" r=".8" fill="#c0c4be"/></pattern>
+          <pattern id="p-grav-l" width="8" height="7" patternUnits="userSpaceOnUse"><rect width="8" height="7" fill="#767c76"/><circle cx="2" cy="2" r="1.8" fill="#9aa09a"/><circle cx="6" cy="5" r="1.5" fill="#5d635d"/></pattern>
+          <pattern id="p-grav-r" width="8" height="7" patternUnits="userSpaceOnUse"><rect width="8" height="7" fill="#5f655f"/><circle cx="2" cy="2" r="1.8" fill="#80867f"/><circle cx="6" cy="5" r="1.5" fill="#4b504b"/></pattern>
+          <pattern id="p-sand" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#d2b987"/><circle cx="1" cy="1" r=".7" fill="#e3cfa3"/><circle cx="3" cy="3" r=".5" fill="#bfa271"/></pattern>
+          <linearGradient id="g-pav" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#bfc3bd"/><stop offset="1" stop-color="#959a95"/></linearGradient>
+          <radialGradient id="g-shadow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#000" stop-opacity=".28"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+          </defs>
+          <ellipse cx="250" cy="120" rx="250" ry="132" fill="url(#g-shadow)"/>
+          <g class="slab s-soil"><polygon points="40,287 250,408 250,466 40,345" fill="url(#p-soil-l)"/><polygon points="250,408 460,287 460,345 250,466" fill="url(#p-soil-r)"/><polygon points="250,166 460,287 250,408 40,287" fill="url(#p-soil)"/><path d="M40,287L250,408L460,287" stroke="rgba(255,255,255,.18)" stroke-width="1" fill="none"/></g>
+          <g class="slab s-fab" style="--off:1"><polygon points="40,282 250,403 250,408 40,287" fill="#d3dad5"/><polygon points="250,403 460,282 460,287 250,408" fill="#b9c2bc"/><polygon points="250,161 460,282 250,403 40,282" fill="url(#p-fab)"/><path d="M40,282L250,403L460,282" stroke="rgba(255,255,255,.18)" stroke-width="1" fill="none"/></g>
+          <g class="slab s-grav" style="--off:1"><polygon points="40,236 250,357 250,403 40,282" fill="url(#p-grav-l)"/><polygon points="250,357 460,236 460,282 250,403" fill="url(#p-grav-r)"/><polygon points="250,115 460,236 250,357 40,236" fill="url(#p-grav)"/><path d="M40,236L250,357L460,236" stroke="rgba(255,255,255,.18)" stroke-width="1" fill="none"/></g>
+          <g class="slab s-sand" style="--off:1"><polygon points="40,223 250,344 250,357 40,236" fill="#c7ad7b"/><polygon points="250,344 460,223 460,236 250,357" fill="#ad9363"/><polygon points="250,102 460,223 250,344 40,223" fill="url(#p-sand)"/><path d="M40,223L250,344L460,223" stroke="rgba(255,255,255,.18)" stroke-width="1" fill="none"/></g>
+          <g class="slab s-pav" style="--off:1"><polygon points="40,205 250,326 250,344 40,223" fill="#8a8f8a"/><polygon points="250,326 460,205 460,223 250,344" fill="#6f746f"/><polygon points="250,84 460,205 250,326 40,205" fill="url(#g-pav)"/><path d="M276.3,99.1L66.3,220.1M302.5,114.3L92.5,235.3M328.8,129.4L118.8,250.4M355,144.5L145,265.5M381.3,159.6L171.3,280.6M407.5,174.8L197.5,295.8M433.8,189.9L223.8,310.9M197.5,114.3L407.5,235.3M145,144.5L355,265.5M92.5,174.8L302.5,295.8M92.5,235.3L92.5,253.3M145,265.5L145,283.5M197.5,295.8L197.5,313.8M276.3,310.9L276.3,328.9M302.5,295.8L302.5,313.8M328.8,280.6L328.8,298.6M355,265.5L355,283.5M381.3,250.4L381.3,268.4M407.5,235.3L407.5,253.3M433.8,220.1L433.8,238.1" stroke="#4a514d" stroke-width="1.6" fill="none"/><polygon points="250,84 460,205 250,326 40,205" fill="none" stroke="#3d4440" stroke-width="3"/><path d="M40,205L250,326L460,205" stroke="rgba(255,255,255,.18)" stroke-width="1" fill="none"/></g>
+          <g class="drain"><line x1="210" y1="236" x2="194" y2="245" style="animation-delay:0s"/><line x1="310" y1="261" x2="294" y2="270" style="animation-delay:0.35s"/><line x1="140" y1="286" x2="124" y2="295" style="animation-delay:0.7s"/><line x1="260" y1="316" x2="244" y2="325" style="animation-delay:1.0499999999999998s"/></g>
+          </svg>
         </div>
         <ul class="iso-legend" aria-hidden="true">
             <li><i style="background:#9aa09b"></i>Pavers + joint sand</li>
@@ -545,6 +558,6 @@
   <button class="lb-nav lb-next" type="button" data-lb-next><svg class="i"><use href="#i-arrow"/></svg><span class="sr">Next photo</span></button>
 </div>
 
-<script src="./assets/js/site.js" defer></script>
+<script src="./assets/js/site.js?v=4800cd4a1a" defer></script>
 </body>
 </html>

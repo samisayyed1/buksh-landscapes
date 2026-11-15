@@ -221,46 +221,6 @@
     sceneHandlers.anatomy = (el, p) => apply(clamp(p * 1.08, 0, 1) * (N - 0.001));
     apply(reduce ? N - 0.001 : 0);
 
-    /* Fit: scale + centre the assembled stack inside its own stage so it can never
-       run into the copy above or the legend below, whatever the phone size. */
-    const stage = $(".iso-stage", anatomy), view = $(".iso-view", anatomy), iso = $(".iso", anatomy);
-    const faces = $$(".slab > div", anatomy);
-    const sec = anatomy.closest(".anatomy");
-    const fit = () => {
-      if (!stage || !view) return;
-      view.style.setProperty("--fs", 1); view.style.setProperty("--fx", "0px"); view.style.setProperty("--fy", "0px");
-      if (innerWidth >= 1000) return;               // desktop layout is sized by CSS
-      sec.classList.add("is-measuring");
-      let U = null;
-      for (const pv of [0, 1]) {
-        iso.style.setProperty("--p", pv);
-        for (const f of faces) {
-          const r = f.getBoundingClientRect();
-          if (!r.width && !r.height) continue;
-          U = U ? { l: Math.min(U.l, r.left), t: Math.min(U.t, r.top), r: Math.max(U.r, r.right), b: Math.max(U.b, r.bottom) } : { l: r.left, t: r.top, r: r.right, b: r.bottom };
-        }
-      }
-      iso.style.removeProperty("--p");
-      sec.classList.remove("is-measuring");
-      const R = stage.getBoundingClientRect(), V = view.getBoundingClientRect();
-      if (!U || R.height < 40) return;
-      const small = innerWidth < 1000;
-      const pad = small ? { t: 30, b: 14, x: 10 } : { t: 40, b: 40, x: 20 };
-      const aw = R.width - pad.x * 2, ah = R.height - pad.t - pad.b;
-      const s = Math.min(small ? 1.25 : 1, aw / (U.r - U.l), ah / (U.b - U.t));
-      const cx = V.left + V.width / 2, cy = V.top + V.height / 2;
-      const ux = (U.l + U.r) / 2, uy = (U.t + U.b) / 2;
-      const ax = R.left + pad.x + aw / 2, ay = R.top + pad.t + ah / 2;
-      view.style.setProperty("--fs", s.toFixed(4));
-      view.style.setProperty("--fx", (ax - cx - s * (ux - cx)).toFixed(1) + "px");
-      view.style.setProperty("--fy", (ay - cy - s * (uy - cy)).toFixed(1) + "px");
-    };
-    let fitT;
-    const refit = () => { clearTimeout(fitT); fitT = setTimeout(fit, 120); };
-    fit();
-    addEventListener("resize", refit, { passive: true });
-    addEventListener("load", fit);
-    document.fonts && document.fonts.ready.then(fit);
   }
 
   /* ---------------- Work: cylinder carousel ---------------- */
