@@ -24,6 +24,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=swap">
 {{preload}}
+{{tracking}}
 <link rel="stylesheet" href="{{root}}assets/css/site.css?v={{cssV}}">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
@@ -62,6 +63,7 @@
 </script>
 </head>
 <body class="{{bodyClass}}">
+{{trackingBody}}
 <a class="skip" href="#main">Skip to content</a>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
@@ -80,10 +82,12 @@
   <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></symbol>
   <symbol id="i-insta" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></symbol>
   <symbol id="i-fb" viewBox="0 0 24 24"><path d="M15 3h-2.5A4.5 4.5 0 0 0 8 7.5V10H5.5v3.5H8V21h3.5v-7.5H14l.5-3.5h-3V7.8c0-.7.6-1.3 1.3-1.3H15z"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
 </svg>
 
-<div class="season-bar" data-season-bar><div class="wrap"><span class="sb-dot" aria-hidden="true"></span><span data-season-msg>Booking spring 2027 design visits now.</span> <a href="{{root}}contact/#quote" data-season-link>Book a visit <svg class="i"><use href="#i-arrow"/></svg></a></div></div>
+<div class="season-bar" data-season-bar><div class="wrap"><span class="sb-dot" aria-hidden="true"></span><span data-season-msg>Booking spring 2027 design visits now.</span> <a href="{{root}}contact-us/#quote" data-season-link>Book a visit <svg class="i"><use href="#i-arrow"/></svg></a></div></div>
 
 <header class="site-header" data-header>
   <div class="wrap header-in">
@@ -92,16 +96,24 @@
     </a>
     <nav class="nav" aria-label="Main">
       <ul>
-        <li><a href="{{root}}services/landscaping-services/" data-nav="services">Landscaping</a></li>
-        <li><a href="{{root}}services/commercial/" data-nav="commercial">Commercial &amp; snow</a></li>
+        <li class="has-mega"><a href="{{root}}services/" data-nav="services">Services<svg class="i chev" aria-hidden="true"><use href="#i-chev"/></svg></a>
+          <div class="mega">
+            <div class="mega-in">
+              <div><p class="mega-k">Residential</p><ul>{{navRes}}</ul></div>
+              <div><p class="mega-k">Commercial</p><ul>{{navCom}}</ul>
+                <a class="mega-card" href="{{root}}services/"><span>All services</span><svg class="i"><use href="#i-arrow"/></svg></a></div>
+            </div>
+          </div>
+        </li>
         <li><a href="{{root}}gallery/" data-nav="gallery">Our work</a></li>
-        <li><a href="{{root}}about/" data-nav="about">About</a></li>
-        <li><a href="{{root}}contact/" data-nav="contact">Contact</a></li>
+        <li><a href="{{root}}reviews/" data-nav="reviews">Reviews</a></li>
+        <li><a href="{{root}}about-us/" data-nav="about">About</a></li>
+        <li><a href="{{root}}contact-us/" data-nav="contact">Contact</a></li>
       </ul>
     </nav>
     <div class="header-cta">
       <a class="hdr-phone" href="tel:{{phone}}" aria-label="Call {{phoneDisplay}}"><svg class="i"><use href="#i-phone"/></svg><span>{{phoneDisplay}}</span></a>
-      <a class="btn btn-gold btn-sm" href="{{root}}contact/#quote">Free quote</a>
+      <a class="btn btn-gold btn-sm hdr-quote" href="{{root}}contact-us/#quote"><span class="hq-long">Request a free estimate</span><span class="hq-short">Free estimate</span></a>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="m-menu" data-menu-btn><svg class="i"><use href="#i-menu"/></svg><span class="sr">Open menu</span></button>
     </div>
   </div>
@@ -112,14 +124,18 @@
     <button class="m-close" type="button" data-menu-close><svg class="i"><use href="#i-x"/></svg><span class="sr">Close menu</span></button>
     <ul class="m-links">
       <li><a href="{{root}}">Home</a></li>
-      <li><a href="{{root}}services/landscaping-services/">Landscaping</a></li>
-      <li><a href="{{root}}services/commercial/">Commercial &amp; snow</a></li>
+      <li><details class="m-svc"><summary>Services<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <p class="mega-k">Residential</p><ul>{{navRes}}</ul>
+        <p class="mega-k">Commercial</p><ul>{{navCom}}</ul>
+        <a class="m-all" href="{{root}}services/">All services <svg class="i"><use href="#i-arrow"/></svg></a>
+      </details></li>
       <li><a href="{{root}}gallery/">Our work</a></li>
-      <li><a href="{{root}}about/">About</a></li>
-      <li><a href="{{root}}contact/">Contact</a></li>
+      <li><a href="{{root}}reviews/">Reviews</a></li>
+      <li><a href="{{root}}about-us/">About</a></li>
+      <li><a href="{{root}}contact-us/">Contact</a></li>
     </ul>
     <div class="m-actions">
-      <a class="btn btn-gold btn-lg" href="{{root}}contact/#quote">Get a free quote <svg class="i"><use href="#i-arrow"/></svg></a>
+      <a class="btn btn-gold btn-lg" href="{{root}}contact-us/#quote">Request a free estimate <svg class="i"><use href="#i-arrow"/></svg></a>
       <a class="btn btn-ghost-light btn-lg" href="tel:{{phone}}"><svg class="i"><use href="#i-phone"/></svg> Call {{phoneDisplay}}</a>
       <p class="m-meta">Phones answered 9 am – 5 pm, 7 days a week</p>
     </div>
@@ -136,7 +152,7 @@
       <p class="ft-mark" aria-hidden="true" data-depth-text>Built for<br>Edmonton.</p>
       <div class="ft-cta">
         <p>Tell us what you're picturing. We'll come see the yard, measure it, and give you a written estimate.</p>
-        <a class="btn btn-gold btn-lg" href="{{root}}contact/#quote">Get a free quote <svg class="i"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-gold btn-lg" href="{{root}}contact-us/#quote">Request a free estimate <svg class="i"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
     <div class="ft-grid">
@@ -151,22 +167,22 @@
       <div class="ft-col">
         <h2 class="ft-h">Landscaping</h2>
         <ul>
-          <li><a href="{{root}}services/landscaping-services/#patios">Paver patios</a></li>
-          <li><a href="{{root}}services/landscaping-services/#turf">Artificial turf</a></li>
-          <li><a href="{{root}}services/landscaping-services/#grading">Rough &amp; final grading</a></li>
-          <li><a href="{{root}}services/landscaping-services/#sod">Sod</a></li>
-          <li><a href="{{root}}services/landscaping-services/#walls">Retaining walls</a></li>
-          <li><a href="{{root}}services/landscaping-services/#lighting">Landscape lighting</a></li>
+          {{navRes}}
         </ul>
       </div>
       <div class="ft-col">
         <h2 class="ft-h">Commercial</h2>
         <ul>
-          <li><a href="{{root}}services/commercial/#maintenance">Lawn maintenance</a></li>
-          <li><a href="{{root}}services/commercial/#snow">Snow removal</a></li>
-          <li><a href="{{root}}services/commercial/#skidsteer">Skid steer services</a></li>
+          {{navCom}}
+        </ul>
+        <h2 class="ft-h" style="margin-top:28px">Company</h2>
+        <ul>
           <li><a href="{{root}}gallery/">Project gallery</a></li>
-          <li><a href="{{root}}about/#faq">FAQ</a></li>
+          <li><a href="{{root}}reviews/">Reviews</a></li>
+          <li><a href="{{root}}about-us/">About us</a></li>
+          <li><a href="{{root}}faq/">FAQ</a></li>
+          <li><a href="{{root}}watering-info/">Watering info</a></li>
+          <li><a href="{{root}}blog/">Blog</a></li>
         </ul>
       </div>
       <div class="ft-col">
@@ -175,20 +191,20 @@
           <li><a href="tel:{{phone}}"><svg class="i"><use href="#i-phone"/></svg>{{phoneDisplay}}</a></li>
           <li><a href="mailto:{{email}}"><svg class="i"><use href="#i-mail"/></svg>{{email}}</a></li>
           <li><span><svg class="i"><use href="#i-clock"/></svg>Mon – Sun, 9 am – 5 pm</span></li>
-          <li><span><svg class="i"><use href="#i-pin"/></svg>Edmonton &amp; surrounding areas</span></li>
+          <li><span><svg class="i"><use href="#i-pin"/></svg>Edmonton, St. Albert, Sherwood Park, Spruce Grove, Leduc, Fort Saskatchewan &amp; area</span></li>
         </ul>
       </div>
     </div>
     <div class="ft-base">
       <p>© {{year}} Buksh Landscapes Ltd. All rights reserved.</p>
-      <p><a href="https://www.financeit.ca/s/Jo1VEA" rel="noopener" target="_blank">Financing through Financeit</a></p>
+      <p><a href="{{root}}privacy-policy/">Privacy policy</a> · <a href="{{root}}terms-conditions/">Terms</a> · <a href="https://www.financeit.ca/s/Jo1VEA" rel="noopener" target="_blank">Financing through Financeit</a></p>
     </div>
   </div>
 </footer>
 
 <div class="callbar" data-callbar>
   <a class="cb-call" href="tel:{{phone}}"><svg class="i"><use href="#i-phone"/></svg><span><b>Call now</b><small data-hours-label>Answered 9–5 daily</small></span></a>
-  <a class="cb-quote" href="{{root}}contact/#quote">Free quote <svg class="i"><use href="#i-arrow"/></svg></a>
+  <a class="cb-quote" href="{{root}}contact-us/#quote">Free estimate <svg class="i"><use href="#i-arrow"/></svg></a>
 </div>
 
 <div class="lightbox" data-lightbox role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>

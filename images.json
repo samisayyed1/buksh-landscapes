@@ -1,30 +1,4 @@
 {
- "garden-path-night": {
-  "w": 3840,
-  "h": 2160,
-  "widths": [
-   640,
-   1280,
-   1920,
-   2560,
-   3200,
-   3840
-  ],
-  "cat": "none",
-  "alt": "Curved paver garden path lit by low path lights at night, lined with blooming hyacinths"
- },
- "garden-path-night-portrait": {
-  "w": 1620,
-  "h": 2160,
-  "widths": [
-   640,
-   960,
-   1280,
-   1620
-  ],
-  "cat": "none",
-  "alt": "Curved paver garden path lit by low path lights at night, lined with blooming hyacinths"
- },
  "aerial-modern-build": {
   "w": 3840,
   "h": 2160,
@@ -60,7 +34,7 @@
    480,
    960
   ],
-  "cat": "lawns",
+  "cat": "builds",
   "alt": "Wide new lawn in front of a large modern home"
  },
  "modern-home-side-lawn": {
@@ -408,7 +382,7 @@
    480,
    960
   ],
-  "cat": "patios",
+  "cat": "walls",
   "alt": "Long block retaining wall above fresh sod"
  },
  "steps-stone": {
@@ -419,7 +393,7 @@
    960,
    1600
   ],
-  "cat": "patios",
+  "cat": "walls",
   "alt": "Wide concrete block steps with lighting and rock beds"
  },
  "steps-lit": {
@@ -440,7 +414,7 @@
    960,
    1600
   ],
-  "cat": "patios",
+  "cat": "walls",
   "alt": "Armour stone steps beside an iron gate"
  },
  "walkway-slab": {
@@ -482,7 +456,7 @@
    960,
    1600
   ],
-  "cat": "lawns",
+  "cat": "builds",
   "alt": "Mulch bed with boulders, young tree and path lights"
  },
  "stepping-gravel": {
@@ -493,7 +467,7 @@
    960,
    1600
   ],
-  "cat": "lawns",
+  "cat": "builds",
   "alt": "Stepping stones through black and grey rock beds"
  },
  "rock-path-front": {
@@ -504,7 +478,7 @@
    960,
    1600
   ],
-  "cat": "lawns",
+  "cat": "builds",
   "alt": "Front entry stepping stones and planting"
  },
  "tree-rock-bed": {
@@ -515,7 +489,7 @@
    960,
    1600
   ],
-  "cat": "lawns",
+  "cat": "builds",
   "alt": "Young tree in a rock bed with curb edging"
  },
  "tree-front": {
@@ -577,7 +551,7 @@
    960,
    1600
   ],
-  "cat": "lawns",
+  "cat": "walls",
   "alt": "Rock garden and steps on a sloped front yard"
  },
  "front-lawn-modern": {
@@ -628,7 +602,7 @@
    480,
    960
   ],
-  "cat": "lawns",
+  "cat": "builds",
   "alt": "Rear lawn with black rock border at a modern home"
  },
  "estate-front": {
@@ -638,7 +612,7 @@
    480,
    960
   ],
-  "cat": "lawns",
+  "cat": "builds",
   "alt": "Estate home front lawn with large mulch beds"
  },
  "pond-waterfall": {
@@ -648,7 +622,7 @@
    480,
    960
   ],
-  "cat": "water",
+  "cat": "builds",
   "alt": "Boulder pond with a small waterfall in a large lawn"
  },
  "grading-site": {
@@ -732,7 +706,7 @@
   "alt": "Edmonton skyline over the river valley in fall"
  },
  "estate-lawn": {
-  "cat": "lawns",
+  "cat": "builds",
   "alt": "Estate home with a broad new lawn and curved mulch beds",
   "w": 4032,
   "h": 3024,
@@ -744,5 +718,17 @@
    3200,
    3840
   ]
+ },
+ "modern-home-side-lawn-portrait": {
+  "w": 1620,
+  "h": 2160,
+  "widths": [
+   640,
+   960,
+   1280,
+   1620
+  ],
+  "cat": "none",
+  "alt": "Side yard of a modern home with sod, boulders and young trees"
  }
 }

@@ -23,9 +23,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=swap">
-<link rel="preload" as="image" media="(max-width: 699px)" imagesrcset="./assets/img/garden-path-night-portrait-640.webp 640w, ./assets/img/garden-path-night-portrait-960.webp 960w, ./assets/img/garden-path-night-portrait-1280.webp 1280w, ./assets/img/garden-path-night-portrait-1620.webp 1620w" imagesizes="100vw" fetchpriority="high">
-<link rel="preload" as="image" media="(min-width: 700px)" imagesrcset="./assets/img/garden-path-night-640.webp 640w, ./assets/img/garden-path-night-1280.webp 1280w, ./assets/img/garden-path-night-1920.webp 1920w, ./assets/img/garden-path-night-2560.webp 2560w, ./assets/img/garden-path-night-3200.webp 3200w, ./assets/img/garden-path-night-3840.webp 3840w" imagesizes="100vw" fetchpriority="high">
-<link rel="stylesheet" href="./assets/css/site.css?v=e4640f2376">
+<link rel="preload" as="image" media="(max-width: 699px)" imagesrcset="./assets/img/modern-home-side-lawn-portrait-640.webp 640w, ./assets/img/modern-home-side-lawn-portrait-960.webp 960w, ./assets/img/modern-home-side-lawn-portrait-1280.webp 1280w, ./assets/img/modern-home-side-lawn-portrait-1620.webp 1620w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" media="(min-width: 700px)" imagesrcset="./assets/img/modern-home-side-lawn-640.webp 640w, ./assets/img/modern-home-side-lawn-1280.webp 1280w, ./assets/img/modern-home-side-lawn-1920.webp 1920w, ./assets/img/modern-home-side-lawn-2560.webp 2560w, ./assets/img/modern-home-side-lawn-3200.webp 3200w, ./assets/img/modern-home-side-lawn-3840.webp 3840w" imagesizes="100vw" fetchpriority="high">
+
+<link rel="stylesheet" href="./assets/css/site.css?v=b44d993026">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
 {
@@ -63,6 +64,7 @@
 </script>
 </head>
 <body class="has-hero">
+
 <a class="skip" href="#main">Skip to content</a>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
@@ -81,10 +83,12 @@
   <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></symbol>
   <symbol id="i-insta" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></symbol>
   <symbol id="i-fb" viewBox="0 0 24 24"><path d="M15 3h-2.5A4.5 4.5 0 0 0 8 7.5V10H5.5v3.5H8V21h3.5v-7.5H14l.5-3.5h-3V7.8c0-.7.6-1.3 1.3-1.3H15z"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
 </svg>
 
-<div class="season-bar" data-season-bar><div class="wrap"><span class="sb-dot" aria-hidden="true"></span><span data-season-msg>Booking spring 2027 design visits now.</span> <a href="./contact/#quote" data-season-link>Book a visit <svg class="i"><use href="#i-arrow"/></svg></a></div></div>
+<div class="season-bar" data-season-bar><div class="wrap"><span class="sb-dot" aria-hidden="true"></span><span data-season-msg>Booking spring 2027 design visits now.</span> <a href="./contact-us/#quote" data-season-link>Book a visit <svg class="i"><use href="#i-arrow"/></svg></a></div></div>
 
 <header class="site-header" data-header>
   <div class="wrap header-in">
@@ -93,16 +97,24 @@
     </a>
     <nav class="nav" aria-label="Main">
       <ul>
-        <li><a href="./services/landscaping-services/" data-nav="services">Landscaping</a></li>
-        <li><a href="./services/commercial/" data-nav="commercial">Commercial &amp; snow</a></li>
+        <li class="has-mega"><a href="./services/" data-nav="services">Services<svg class="i chev" aria-hidden="true"><use href="#i-chev"/></svg></a>
+          <div class="mega">
+            <div class="mega-in">
+              <div><p class="mega-k">Residential</p><ul><li><a href="./services/landscaping-services/">Complete landscape construction</a></li><li><a href="./services/paver-patios/">Patios & paving stones</a></li><li><a href="./services/artificial-grass/">Artificial turf & putting greens</a></li><li><a href="./services/rough-final-grading/">Rough & final grading</a></li><li><a href="./services/sod-installation/">Sod installation</a></li><li><a href="./services/retaining-walls/">Retaining walls</a></li><li><a href="./services/rock-mulch-ground-cover/">Decorative rock & mulch</a></li><li><a href="./services/tree-and-shrub-installation/">Trees & shrubs</a></li><li><a href="./services/landscape-lighting/">Landscape lighting</a></li><li><a href="./services/fire-pits/">Fire pits</a></li><li><a href="./services/water-features/">Water features</a></li></ul></div>
+              <div><p class="mega-k">Commercial</p><ul><li><a href="./services/summer-maintenance/">Commercial lawn maintenance</a></li><li><a href="./services/winter-maintenance/">Commercial snow removal</a></li><li><a href="./services/skidsteer-services/">Skid steer services</a></li></ul>
+                <a class="mega-card" href="./services/"><span>All services</span><svg class="i"><use href="#i-arrow"/></svg></a></div>
+            </div>
+          </div>
+        </li>
         <li><a href="./gallery/" data-nav="gallery">Our work</a></li>
-        <li><a href="./about/" data-nav="about">About</a></li>
-        <li><a href="./contact/" data-nav="contact">Contact</a></li>
+        <li><a href="./reviews/" data-nav="reviews">Reviews</a></li>
+        <li><a href="./about-us/" data-nav="about">About</a></li>
+        <li><a href="./contact-us/" data-nav="contact">Contact</a></li>
       </ul>
     </nav>
     <div class="header-cta">
       <a class="hdr-phone" href="tel:+17809408283" aria-label="Call 780-940-8283"><svg class="i"><use href="#i-phone"/></svg><span>780-940-8283</span></a>
-      <a class="btn btn-gold btn-sm" href="./contact/#quote">Free quote</a>
+      <a class="btn btn-gold btn-sm hdr-quote" href="./contact-us/#quote"><span class="hq-long">Request a free estimate</span><span class="hq-short">Free estimate</span></a>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="m-menu" data-menu-btn><svg class="i"><use href="#i-menu"/></svg><span class="sr">Open menu</span></button>
     </div>
   </div>
@@ -113,14 +125,18 @@
     <button class="m-close" type="button" data-menu-close><svg class="i"><use href="#i-x"/></svg><span class="sr">Close menu</span></button>
     <ul class="m-links">
       <li><a href="./">Home</a></li>
-      <li><a href="./services/landscaping-services/">Landscaping</a></li>
-      <li><a href="./services/commercial/">Commercial &amp; snow</a></li>
+      <li><details class="m-svc"><summary>Services<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <p class="mega-k">Residential</p><ul><li><a href="./services/landscaping-services/">Complete landscape construction</a></li><li><a href="./services/paver-patios/">Patios & paving stones</a></li><li><a href="./services/artificial-grass/">Artificial turf & putting greens</a></li><li><a href="./services/rough-final-grading/">Rough & final grading</a></li><li><a href="./services/sod-installation/">Sod installation</a></li><li><a href="./services/retaining-walls/">Retaining walls</a></li><li><a href="./services/rock-mulch-ground-cover/">Decorative rock & mulch</a></li><li><a href="./services/tree-and-shrub-installation/">Trees & shrubs</a></li><li><a href="./services/landscape-lighting/">Landscape lighting</a></li><li><a href="./services/fire-pits/">Fire pits</a></li><li><a href="./services/water-features/">Water features</a></li></ul>
+        <p class="mega-k">Commercial</p><ul><li><a href="./services/summer-maintenance/">Commercial lawn maintenance</a></li><li><a href="./services/winter-maintenance/">Commercial snow removal</a></li><li><a href="./services/skidsteer-services/">Skid steer services</a></li></ul>
+        <a class="m-all" href="./services/">All services <svg class="i"><use href="#i-arrow"/></svg></a>
+      </details></li>
       <li><a href="./gallery/">Our work</a></li>
-      <li><a href="./about/">About</a></li>
-      <li><a href="./contact/">Contact</a></li>
+      <li><a href="./reviews/">Reviews</a></li>
+      <li><a href="./about-us/">About</a></li>
+      <li><a href="./contact-us/">Contact</a></li>
     </ul>
     <div class="m-actions">
-      <a class="btn btn-gold btn-lg" href="./contact/#quote">Get a free quote <svg class="i"><use href="#i-arrow"/></svg></a>
+      <a class="btn btn-gold btn-lg" href="./contact-us/#quote">Request a free estimate <svg class="i"><use href="#i-arrow"/></svg></a>
       <a class="btn btn-ghost-light btn-lg" href="tel:+17809408283"><svg class="i"><use href="#i-phone"/></svg> Call 780-940-8283</a>
       <p class="m-meta">Phones answered 9 am – 5 pm, 7 days a week</p>
     </div>
@@ -130,14 +146,15 @@
 <main id="main">
 
 <section class="hero" data-p="exit" aria-labelledby="hero-h">
-  <div class="hero-media"><picture><source media="(max-width: 699px)" srcset="./assets/img/garden-path-night-portrait-640.webp 640w, ./assets/img/garden-path-night-portrait-960.webp 960w, ./assets/img/garden-path-night-portrait-1280.webp 1280w, ./assets/img/garden-path-night-portrait-1620.webp 1620w" sizes="100vw" width="1620" height="2160"><img src="./assets/img/garden-path-night-1280.webp" srcset="./assets/img/garden-path-night-640.webp 640w, ./assets/img/garden-path-night-1280.webp 1280w, ./assets/img/garden-path-night-1920.webp 1920w, ./assets/img/garden-path-night-2560.webp 2560w, ./assets/img/garden-path-night-3200.webp 3200w, ./assets/img/garden-path-night-3840.webp 3840w" sizes="100vw" width="3840" height="2160" alt="Curved paver garden path lit by low path lights at night, lined with blooming hyacinths" loading="eager" decoding="async" fetchpriority="high"></picture></div>
+  <div class="hero-media"><picture><source media="(max-width: 699px)" srcset="./assets/img/modern-home-side-lawn-portrait-640.webp 640w, ./assets/img/modern-home-side-lawn-portrait-960.webp 960w, ./assets/img/modern-home-side-lawn-portrait-1280.webp 1280w, ./assets/img/modern-home-side-lawn-portrait-1620.webp 1620w" sizes="100vw" width="1620" height="2160"><img src="./assets/img/modern-home-side-lawn-1280.webp" srcset="./assets/img/modern-home-side-lawn-640.webp 640w, ./assets/img/modern-home-side-lawn-1280.webp 1280w, ./assets/img/modern-home-side-lawn-1920.webp 1920w, ./assets/img/modern-home-side-lawn-2560.webp 2560w, ./assets/img/modern-home-side-lawn-3200.webp 3200w, ./assets/img/modern-home-side-lawn-3840.webp 3840w" sizes="100vw" width="3840" height="2160" alt="Modern Edmonton home with fresh sod, spruce trees and boulder beds landscaped by Buksh Landscapes" loading="eager" decoding="async" fetchpriority="high"></picture></div>
   <div class="hero-in">
     <div class="wrap hero-grid">
       <div>
-        <h1 class="h1" id="hero-h"><span class="ln"><span>Yards built</span></span><span class="ln"><span>to outlast</span></span><span class="ln"><span class="gold">Edmonton winters.</span></span></h1>
-        <p class="lede">Patios, turf, grading and complete landscape builds from a family crew that shows up when we say, builds it properly, and puts two years of workmanship coverage behind every hardscape.</p>
+        <p class="hero-k"><span class="hk-b">Buksh Landscapes · </span>Family owned since 2017</p>
+        <h1 class="h1 hero-h1" id="hero-h"><span class="ln"><span>Professional landscaping</span></span><span class="ln"><span>services in Edmonton</span></span><span class="ln"><span class="gold">&amp; surrounding areas.</span></span></h1>
+        <p class="lede">Patios, artificial turf, grading, retaining walls and complete landscape construction for homes, builders and commercial properties, built properly and backed by two years of workmanship coverage.</p>
         <div class="hero-actions">
-          <a class="btn btn-gold btn-lg" href="#quote">Get a free quote <svg class="i"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-gold btn-lg" href="#quote">Request a free estimate <svg class="i"><use href="#i-arrow"/></svg></a>
           <a class="btn btn-ghost-light btn-lg" href="tel:+17809408283"><svg class="i"><use href="#i-phone"/></svg> 780-940-8283</a>
         </div>
         <p class="hero-note"><span><svg class="i"><use href="#i-check"/></svg>Free on-site estimates</span><span><svg class="i"><use href="#i-check"/></svg>Financing through Financeit</span><span><svg class="i"><use href="#i-check"/></svg>Open 7 days</span></p>
@@ -180,21 +197,21 @@
       <p class="lede">Whether you just got the keys to a new build or you're redoing a tired backyard, we handle every stage so nothing falls between trades.</p>
     </div>
     <div class="svc-grid">
-      <a class="svc big rise3d" data-e="0" data-tilt href="services/landscaping-services/#patios"><img src="./assets/img/patio-sunset-960.webp" srcset="./assets/img/patio-sunset-480.webp 480w, ./assets/img/patio-sunset-960.webp 960w" sizes="(min-width: 700px) 50vw, 100vw" width="1260" height="945" alt="Grey paver patio and lawn at sunset backing onto green space" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Paver patios</h3><p>Built on a deep, compacted base so they stay flat through freeze-thaw.</p></span></a>
-      <a class="svc big rise3d" data-e="40" data-tilt href="services/landscaping-services/#turf"><img src="./assets/img/putting-green-modern-960.webp" srcset="./assets/img/putting-green-modern-480.webp 480w, ./assets/img/putting-green-modern-960.webp 960w" sizes="(min-width: 700px) 50vw, 100vw" width="1200" height="900" alt="Backyard artificial putting green with flags beside a modern home" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Artificial turf &amp; putting greens</h3><p>Green all summer, no mowing, no watering. Drains like a lawn should.</p></span></a>
-      <a class="svc rise3d" data-e="0" data-tilt href="services/landscaping-services/#grading"><img src="./assets/img/grading-site-960.webp" srcset="./assets/img/grading-site-480.webp 480w, ./assets/img/grading-site-960.webp 960w" sizes="(min-width: 700px) 25vw, 50vw" width="1260" height="945" alt="Skid steer grading the yard of a new build" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Rough &amp; final grading</h3><p>Certification guaranteed.</p></span></a>
-      <a class="svc rise3d" data-e="30" data-tilt href="services/landscaping-services/#sod"><img src="./assets/img/sod-install-960.webp" srcset="./assets/img/sod-install-480.webp 480w, ./assets/img/sod-install-960.webp 960w" sizes="(min-width: 700px) 25vw, 50vw" width="1200" height="900" alt="Freshly laid sod rolls in a fenced backyard" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Sod</h3><p>Fresh lawn, laid tight.</p></span></a>
-      <a class="svc rise3d" data-e="60" data-tilt href="services/landscaping-services/#walls"><img src="./assets/img/retaining-wall-960.webp" srcset="./assets/img/retaining-wall-480.webp 480w, ./assets/img/retaining-wall-960.webp 960w" sizes="(min-width: 700px) 25vw, 50vw" width="1205" height="908" alt="Long block retaining wall above fresh sod" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Retaining walls</h3><p>Hold slopes, add levels.</p></span></a>
-      <a class="svc rise3d" data-e="90" data-tilt href="services/landscaping-services/#firepits"><img src="./assets/img/fire-pit-pavers-960.webp" srcset="./assets/img/fire-pit-pavers-480.webp 480w, ./assets/img/fire-pit-pavers-960.webp 960w" sizes="(min-width: 700px) 25vw, 50vw" width="1200" height="1600" alt="Round paver fire pit patio with seat wall" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Fire pits</h3><p>Where the evenings happen.</p></span></a>
-      <a class="svc rise3d" data-e="0" data-tilt href="services/landscaping-services/#lighting"><img src="./assets/img/night-lighting-960.webp" srcset="./assets/img/night-lighting-480.webp 480w, ./assets/img/night-lighting-960.webp 960w" sizes="(min-width: 700px) 25vw, 50vw" width="1200" height="900" alt="Landscape and soffit lighting at night along a row of spruce trees" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Landscape lighting</h3><p>Safer steps, longer nights.</p></span></a>
-      <a class="svc rise3d" data-e="30" data-tilt href="services/landscaping-services/#water"><img src="./assets/img/pond-waterfall-960.webp" srcset="./assets/img/pond-waterfall-480.webp 480w, ./assets/img/pond-waterfall-960.webp 960w" sizes="(min-width: 700px) 25vw, 50vw" width="1260" height="719" alt="Boulder pond with a small waterfall in a large lawn" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Water features</h3><p>Ponds and waterfalls.</p></span></a>
-      <a class="svc rise3d" data-e="60" data-tilt href="services/landscaping-services/#trees"><img src="./assets/img/tree-rock-bed-960.webp" srcset="./assets/img/tree-rock-bed-480.webp 480w, ./assets/img/tree-rock-bed-960.webp 960w, ./assets/img/tree-rock-bed-1600.webp 1600w" sizes="(min-width: 700px) 25vw, 50vw" width="1600" height="1200" alt="Young tree in a rock bed with curb edging" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Trees &amp; shrubs</h3><p>Planted to survive here.</p></span></a>
-      <a class="svc rise3d" data-e="90" data-tilt href="services/landscaping-services/#rock"><img src="./assets/img/stepping-gravel-960.webp" srcset="./assets/img/stepping-gravel-480.webp 480w, ./assets/img/stepping-gravel-960.webp 960w, ./assets/img/stepping-gravel-1600.webp 1600w" sizes="(min-width: 700px) 25vw, 50vw" width="1800" height="1350" alt="Stepping stones through black and grey rock beds" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Rock &amp; mulch</h3><p>Low-care beds that look sharp.</p></span></a>
+      <a class="svc big rise3d" data-e="0" data-tilt href="services/paver-patios/"><img src="./assets/img/patio-sunset-960.webp" srcset="./assets/img/patio-sunset-480.webp 480w, ./assets/img/patio-sunset-960.webp 960w" sizes="(min-width: 700px) 50vw, 100vw" width="1260" height="945" alt="Grey paver patio and lawn at sunset backing onto green space" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Paver patios</h3><p>Built on a deep, compacted base so they stay flat through freeze-thaw.</p></span></a>
+      <a class="svc big rise3d" data-e="40" data-tilt href="services/artificial-grass/"><img src="./assets/img/putting-green-modern-960.webp" srcset="./assets/img/putting-green-modern-480.webp 480w, ./assets/img/putting-green-modern-960.webp 960w" sizes="(min-width: 700px) 50vw, 100vw" width="1200" height="900" alt="Backyard artificial putting green with flags beside a modern home" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Artificial turf &amp; putting greens</h3><p>Green all summer, no mowing, no watering. Drains like a lawn should.</p></span></a>
+      <a class="svc rise3d" data-e="0" data-tilt href="services/rough-final-grading/"><img src="./assets/img/grading-site-960.webp" srcset="./assets/img/grading-site-480.webp 480w, ./assets/img/grading-site-960.webp 960w" sizes="(min-width: 700px) 25vw, 50vw" width="1260" height="945" alt="Skid steer grading the yard of a new build" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Rough &amp; final grading</h3><p>Certification guaranteed.</p></span></a>
+      <a class="svc rise3d" data-e="30" data-tilt href="services/sod-installation/"><img src="./assets/img/sod-install-960.webp" srcset="./assets/img/sod-install-480.webp 480w, ./assets/img/sod-install-960.webp 960w" sizes="(min-width: 700px) 25vw, 50vw" width="1200" height="900" alt="Freshly laid sod rolls in a fenced backyard" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Sod</h3><p>Fresh lawn, laid tight.</p></span></a>
+      <a class="svc rise3d" data-e="60" data-tilt href="services/retaining-walls/"><img src="./assets/img/retaining-wall-960.webp" srcset="./assets/img/retaining-wall-480.webp 480w, ./assets/img/retaining-wall-960.webp 960w" sizes="(min-width: 700px) 25vw, 50vw" width="1205" height="908" alt="Long block retaining wall above fresh sod" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Retaining walls</h3><p>Hold slopes, add levels.</p></span></a>
+      <a class="svc rise3d" data-e="90" data-tilt href="services/fire-pits/"><img src="./assets/img/fire-pit-pavers-960.webp" srcset="./assets/img/fire-pit-pavers-480.webp 480w, ./assets/img/fire-pit-pavers-960.webp 960w" sizes="(min-width: 700px) 25vw, 50vw" width="1200" height="1600" alt="Round paver fire pit patio with seat wall" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Fire pits</h3><p>Where the evenings happen.</p></span></a>
+      <a class="svc rise3d" data-e="0" data-tilt href="services/landscape-lighting/"><img src="./assets/img/night-lighting-960.webp" srcset="./assets/img/night-lighting-480.webp 480w, ./assets/img/night-lighting-960.webp 960w" sizes="(min-width: 700px) 25vw, 50vw" width="1200" height="900" alt="Landscape and soffit lighting at night along a row of spruce trees" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Landscape lighting</h3><p>Safer steps, longer nights.</p></span></a>
+      <a class="svc rise3d" data-e="30" data-tilt href="services/landscaping-services/"><img src="./assets/img/aerial-backyard-firepit-960.webp" srcset="./assets/img/aerial-backyard-firepit-480.webp 480w, ./assets/img/aerial-backyard-firepit-960.webp 960w" sizes="(min-width: 700px) 25vw, 50vw" width="1024" height="768" alt="Aerial view of a new backyard with sod, play area and patio" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Complete landscaping</h3><p>Bare dirt to finished yard.</p></span></a>
+      <a class="svc rise3d" data-e="60" data-tilt href="services/tree-and-shrub-installation/"><img src="./assets/img/tree-rock-bed-960.webp" srcset="./assets/img/tree-rock-bed-480.webp 480w, ./assets/img/tree-rock-bed-960.webp 960w, ./assets/img/tree-rock-bed-1600.webp 1600w" sizes="(min-width: 700px) 25vw, 50vw" width="1600" height="1200" alt="Young tree in a rock bed with curb edging" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Trees &amp; shrubs</h3><p>Planted to survive here.</p></span></a>
+      <a class="svc rise3d" data-e="90" data-tilt href="services/rock-mulch-ground-cover/"><img src="./assets/img/stepping-gravel-960.webp" srcset="./assets/img/stepping-gravel-480.webp 480w, ./assets/img/stepping-gravel-960.webp 960w, ./assets/img/stepping-gravel-1600.webp 1600w" sizes="(min-width: 700px) 25vw, 50vw" width="1800" height="1350" alt="Stepping stones through black and grey rock beds" loading="lazy" decoding="async"><span class="svc-go"><svg class="i"><use href="#i-arrow"/></svg></span><span class="svc-body"><h3>Rock &amp; mulch</h3><p>Low-care beds that look sharp.</p></span></a>
     </div>
     <div class="svc-commercial">
-      <a class="svc-row reveal" data-e="0" href="services/commercial/#maintenance"><img src="./assets/img/front-lawn-modern-960.webp" srcset="./assets/img/front-lawn-modern-480.webp 480w, ./assets/img/front-lawn-modern-960.webp 960w" sizes="76px" width="1260" height="840" alt="Striped front lawn with young trees at a modern home" loading="lazy" decoding="async"><span><b>Commercial lawn maintenance</b><small>Mowing, fertilizing, pruning, cleanups</small></span><svg class="i"><use href="#i-arrow"/></svg></a>
-      <a class="svc-row reveal" data-e="30" href="services/commercial/#snow"><img src="./assets/img/snow-night-lot-960.webp" srcset="./assets/img/snow-night-lot-480.webp 480w, ./assets/img/snow-night-lot-960.webp 960w" sizes="76px" width="1260" height="945" alt="Bobcat clearing a commercial parking lot at night" loading="lazy" decoding="async"><span><b>Commercial snow removal</b><small>Lots cleared, hauled and sanded</small></span><svg class="i"><use href="#i-arrow"/></svg></a>
-      <a class="svc-row reveal" data-e="60" href="services/commercial/#skidsteer"><img src="./assets/img/skidsteer-fleet-480.webp" srcset="./assets/img/skidsteer-fleet-480.webp 480w" sizes="76px" width="630" height="484" alt="Wheeled and tracked Bobcats with snow attachments" loading="lazy" decoding="async"><span><b>Skid steer services</b><small>Excavation, augering, breaking</small></span><svg class="i"><use href="#i-arrow"/></svg></a>
+      <a class="svc-row reveal" data-e="0" href="services/summer-maintenance/"><img src="./assets/img/front-lawn-modern-960.webp" srcset="./assets/img/front-lawn-modern-480.webp 480w, ./assets/img/front-lawn-modern-960.webp 960w" sizes="76px" width="1260" height="840" alt="Striped front lawn with young trees at a modern home" loading="lazy" decoding="async"><span><b>Commercial lawn maintenance</b><small>Mowing, fertilizing, pruning, cleanups</small></span><svg class="i"><use href="#i-arrow"/></svg></a>
+      <a class="svc-row reveal" data-e="30" href="services/winter-maintenance/"><img src="./assets/img/snow-night-lot-960.webp" srcset="./assets/img/snow-night-lot-480.webp 480w, ./assets/img/snow-night-lot-960.webp 960w" sizes="76px" width="1260" height="945" alt="Bobcat clearing a commercial parking lot at night" loading="lazy" decoding="async"><span><b>Commercial snow removal</b><small>Lots cleared, hauled and sanded</small></span><svg class="i"><use href="#i-arrow"/></svg></a>
+      <a class="svc-row reveal" data-e="60" href="services/skidsteer-services/"><img src="./assets/img/skidsteer-fleet-480.webp" srcset="./assets/img/skidsteer-fleet-480.webp 480w" sizes="76px" width="630" height="484" alt="Wheeled and tracked Bobcats with snow attachments" loading="lazy" decoding="async"><span><b>Skid steer services</b><small>Excavation, augering, breaking</small></span><svg class="i"><use href="#i-arrow"/></svg></a>
     </div>
   </div>
 </section>
@@ -276,21 +293,60 @@
   </div>
 </section>
 
-<section class="section promises" aria-labelledby="prom-h">
+<section class="section why" aria-labelledby="why-h">
   <div class="wrap">
-    <div class="section-head">
-      <span class="kicker">How we work</span>
-      <h2 class="h2" id="prom-h">We keep it simple.</h2>
-      <p class="lede">The most common landscaping horror stories are contractors who vanish, rush, or cut corners underground. These are the four things we won't compromise on.</p>
+    <div class="why-head">
+      <div>
+        <span class="kicker">Why Buksh Landscapes</span>
+        <h2 class="h2" id="why-h">The landscaper Edmonton homeowners and builders call back.</h2>
+      </div>
+      <p class="lede">Big residential builds and commercial sites, done by a family company that still answers its own phone. Here's what you can count on.</p>
     </div>
-    <div class="promise-list">
-      <div class="promise" data-e="0"><h3>We <em>show up</em> when we say.</h3><p>You won't be chasing us for a start date. You get one, and a crew that arrives on it.</p></div>
-      <div class="promise" data-e="0"><h3>We do it <em>properly</em>.</h3><p>Proper excavation, proper base, proper drainage. Nothing rushed to squeeze in another job.</p></div>
-      <div class="promise" data-e="0"><h3>We build it to <em>last</em>.</h3><p>Two years of workmanship coverage on hardscapes, and one year on turf and plants.</p></div>
-      <div class="promise" data-e="0"><h3>We keep it <em>looking good</em>.</h3><p>Care instructions when we finish, workmanship coverage after, and a team that picks up the phone 7 days a week.</p></div>
+    <div class="why-grid">
+      <article class="why-card reveal" data-e="0">
+        <span class="why-ico"><svg class="i"><use href="#i-level"/></svg></span>
+        <h3>Workmanship</h3>
+        <p>Proper excavation, proper base, proper drainage. The parts you never see are built to the same standard as the parts you do.</p>
+      </article>
+      <article class="why-card reveal" data-e="30">
+        <span class="why-ico"><svg class="i"><use href="#i-family"/></svg></span>
+        <h3>Experience</h3>
+        <p>Over 20 years of combined industry experience, and our own crew and equipment on every job, from final grading to finished yard.</p>
+      </article>
+      <article class="why-card reveal" data-e="60">
+        <span class="why-ico"><svg class="i"><use href="#i-clock"/></svg></span>
+        <h3>Reliability</h3>
+        <p>You get a start date and a crew that arrives on it. Phones answered 9 am to 5 pm, 7 days a week, before, during and after the job.</p>
+      </article>
+      <article class="why-card reveal" data-e="90">
+        <span class="why-ico"><svg class="i"><use href="#i-check"/></svg></span>
+        <h3>Attention to detail</h3>
+        <p>Clean cuts, straight lines, tight seams and a tidy site. We walk the finished yard with you before we call it done.</p>
+      </article>
     </div>
+    <ul class="why-stats">
+      <li><b>2017</b><span>Family owned in Edmonton since</span></li>
+      <li><b>20+</b><span>Years of combined experience</span></li>
+      <li><b>2 yr</b><span>Workmanship coverage on hardscapes</span></li>
+      <li><b>7 days</b><span>A week, phones answered</span></li>
+    </ul>
   </div>
 </section>
+
+
+<section class="section reviews" id="reviews" aria-labelledby="rev-h">
+  <div class="wrap">
+    <div class="rev-head">
+      <div>
+        <span class="kicker">Google reviews</span>
+        <h2 class="h2" id="rev-h">What our clients say.</h2>
+      </div>
+      <a class="rev-badge" href="https://www.google.com/maps/search/?api=1&amp;query=Buksh%20Landscapes%20Ltd%20Edmonton" target="_blank" rel="noopener"><svg class="g-logo" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg><span><b class="rev-badge-t">Google reviews</b><small>Read what clients say</small></span></a>
+    </div>
+    <div class="rev-empty"><svg class="g-logo" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg><p>Our clients' reviews live on our Google Business Profile. Have a read, and if we've built for you, we'd love to hear how it's holding up.</p><div class="rev-actions"><a class="btn btn-dark" href="https://www.google.com/maps/search/?api=1&amp;query=Buksh%20Landscapes%20Ltd%20Edmonton" target="_blank" rel="noopener">Read our Google reviews <svg class="i"><use href="#i-arrow"/></svg></a><a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Buksh%20Landscapes%20Ltd%20Edmonton" target="_blank" rel="noopener">Leave a review</a></div></div>
+  </div>
+</section>
+
 
 <section class="section grading" id="grading" aria-labelledby="grade-h">
   <div class="wrap grading-grid">
@@ -309,7 +365,7 @@
         <div class="tl"><span class="tl-n">04</span><div><b>Sod goes down</b><p>The same crew lays your new lawn once grades pass. You're finished.</p></div></div>
       </div>
       <p class="fineprint">Deadlines and deposit terms depend on your builder and the City of Edmonton's <a href="https://www.edmonton.ca/residential_neighbourhoods/lot_grading" rel="noopener" target="_blank">lot grading rules</a>. Bring your paperwork to the site visit and we'll walk you through it.</p>
-      <div class="hero-actions" style="animation:none;margin-top:24px"><a class="btn btn-dark btn-lg" href="contact/?service=grading#quote">Book a grading visit <svg class="i"><use href="#i-arrow"/></svg></a></div>
+      <div class="hero-actions" style="animation:none;margin-top:24px"><a class="btn btn-dark btn-lg" href="contact-us/?service=grading#quote">Book a grading visit <svg class="i"><use href="#i-arrow"/></svg></a></div>
     </div>
   </div>
 </section>
@@ -343,7 +399,7 @@
         <li><svg class="i"><use href="#i-check"/></svg>Mowing, fertilizing, weed control and pruning</li>
         <li><svg class="i"><use href="#i-check"/></svg>Spring and fall cleanups, lot sweeping</li>
       </ul>
-      <a class="btn btn-gold btn-lg" href="services/commercial/">Commercial services <svg class="i"><use href="#i-arrow"/></svg></a>
+      <a class="btn btn-gold btn-lg" href="services/winter-maintenance/">Commercial snow removal <svg class="i"><use href="#i-arrow"/></svg></a>
     </div>
   </div>
 </section>
@@ -369,7 +425,7 @@
 <section class="section quote on-dark" id="quote" aria-labelledby="quote-h">
   <div class="wrap quote-grid">
     <div class="quote-aside">
-      <span class="kicker">Free estimate</span>
+      <span class="kicker">Request a free estimate</span>
       <h2 class="h2" id="quote-h" style="margin-top:18px">Let's walk your yard.</h2>
       <p class="lede" style="margin-top:18px">Three quick steps. We'll come out, measure, talk through ideas and give you a written estimate. No cost, no pressure.</p>
       <ul>
@@ -452,7 +508,13 @@
             <div class="field"><label for="q-phone">Phone</label><input id="q-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" data-req aria-describedby="q-phone-err"><p class="err" id="q-phone-err">Enter a 10-digit phone number.</p></div>
             <div class="field"><label for="q-email">Email <small style="font-weight:400;color:var(--granite)">(optional)</small></label><input id="q-email" name="email" type="email" autocomplete="email" data-email aria-describedby="q-email-err"><p class="err" id="q-email-err">Check the email address.</p></div>
             <div class="field"><label for="q-addr">Address or neighbourhood</label><input id="q-addr" name="address" autocomplete="street-address"></div>
-            <div class="field full"><label for="q-notes">Anything else? <small style="font-weight:400;color:var(--granite)">(optional)</small></label><textarea id="q-notes" name="notes" maxlength="1000" placeholder="Yard size, what's there now, ideas you've saved…"></textarea></div>
+            <div class="field full"><label for="q-notes">Describe your project <small style="font-weight:400;color:var(--granite)">(optional)</small></label><textarea id="q-notes" name="notes" maxlength="1500" placeholder="Yard size, what's there now, what you'd like, ideas you've saved…"></textarea></div>
+            <div class="field full q-photos">
+              <span class="q-label-s" id="q-photos-l">Photos of your yard <small style="font-weight:400;color:var(--granite)">(optional, up to 5)</small></span>
+              <label class="q-drop" for="q-photos"><svg class="i" aria-hidden="true"><use href="#i-camera"/></svg><span><b>Add photos</b><small>Snap the yard from a few angles. It helps us plan the visit.</small></span></label>
+              <input id="q-photos" class="sr" name="photos" type="file" accept="image/*" multiple aria-labelledby="q-photos-l" data-q-photos>
+              <ul class="q-thumbs" data-q-thumbs aria-live="polite"></ul>
+            </div>
           </div>
           <div class="hp" aria-hidden="true"><label>Leave empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
         </fieldset>
@@ -489,7 +551,7 @@
       <p class="ft-mark" aria-hidden="true" data-depth-text>Built for<br>Edmonton.</p>
       <div class="ft-cta">
         <p>Tell us what you're picturing. We'll come see the yard, measure it, and give you a written estimate.</p>
-        <a class="btn btn-gold btn-lg" href="./contact/#quote">Get a free quote <svg class="i"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-gold btn-lg" href="./contact-us/#quote">Request a free estimate <svg class="i"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
     <div class="ft-grid">
@@ -504,22 +566,22 @@
       <div class="ft-col">
         <h2 class="ft-h">Landscaping</h2>
         <ul>
-          <li><a href="./services/landscaping-services/#patios">Paver patios</a></li>
-          <li><a href="./services/landscaping-services/#turf">Artificial turf</a></li>
-          <li><a href="./services/landscaping-services/#grading">Rough &amp; final grading</a></li>
-          <li><a href="./services/landscaping-services/#sod">Sod</a></li>
-          <li><a href="./services/landscaping-services/#walls">Retaining walls</a></li>
-          <li><a href="./services/landscaping-services/#lighting">Landscape lighting</a></li>
+          <li><a href="./services/landscaping-services/">Complete landscape construction</a></li><li><a href="./services/paver-patios/">Patios & paving stones</a></li><li><a href="./services/artificial-grass/">Artificial turf & putting greens</a></li><li><a href="./services/rough-final-grading/">Rough & final grading</a></li><li><a href="./services/sod-installation/">Sod installation</a></li><li><a href="./services/retaining-walls/">Retaining walls</a></li><li><a href="./services/rock-mulch-ground-cover/">Decorative rock & mulch</a></li><li><a href="./services/tree-and-shrub-installation/">Trees & shrubs</a></li><li><a href="./services/landscape-lighting/">Landscape lighting</a></li><li><a href="./services/fire-pits/">Fire pits</a></li><li><a href="./services/water-features/">Water features</a></li>
         </ul>
       </div>
       <div class="ft-col">
         <h2 class="ft-h">Commercial</h2>
         <ul>
-          <li><a href="./services/commercial/#maintenance">Lawn maintenance</a></li>
-          <li><a href="./services/commercial/#snow">Snow removal</a></li>
-          <li><a href="./services/commercial/#skidsteer">Skid steer services</a></li>
+          <li><a href="./services/summer-maintenance/">Commercial lawn maintenance</a></li><li><a href="./services/winter-maintenance/">Commercial snow removal</a></li><li><a href="./services/skidsteer-services/">Skid steer services</a></li>
+        </ul>
+        <h2 class="ft-h" style="margin-top:28px">Company</h2>
+        <ul>
           <li><a href="./gallery/">Project gallery</a></li>
-          <li><a href="./about/#faq">FAQ</a></li>
+          <li><a href="./reviews/">Reviews</a></li>
+          <li><a href="./about-us/">About us</a></li>
+          <li><a href="./faq/">FAQ</a></li>
+          <li><a href="./watering-info/">Watering info</a></li>
+          <li><a href="./blog/">Blog</a></li>
         </ul>
       </div>
       <div class="ft-col">
@@ -528,20 +590,20 @@
           <li><a href="tel:+17809408283"><svg class="i"><use href="#i-phone"/></svg>780-940-8283</a></li>
           <li><a href="mailto:info@bukshlandscapes.com"><svg class="i"><use href="#i-mail"/></svg>info@bukshlandscapes.com</a></li>
           <li><span><svg class="i"><use href="#i-clock"/></svg>Mon – Sun, 9 am – 5 pm</span></li>
-          <li><span><svg class="i"><use href="#i-pin"/></svg>Edmonton &amp; surrounding areas</span></li>
+          <li><span><svg class="i"><use href="#i-pin"/></svg>Edmonton, St. Albert, Sherwood Park, Spruce Grove, Leduc, Fort Saskatchewan &amp; area</span></li>
         </ul>
       </div>
     </div>
     <div class="ft-base">
       <p>© 2026 Buksh Landscapes Ltd. All rights reserved.</p>
-      <p><a href="https://www.financeit.ca/s/Jo1VEA" rel="noopener" target="_blank">Financing through Financeit</a></p>
+      <p><a href="./privacy-policy/">Privacy policy</a> · <a href="./terms-conditions/">Terms</a> · <a href="https://www.financeit.ca/s/Jo1VEA" rel="noopener" target="_blank">Financing through Financeit</a></p>
     </div>
   </div>
 </footer>
 
 <div class="callbar" data-callbar>
   <a class="cb-call" href="tel:+17809408283"><svg class="i"><use href="#i-phone"/></svg><span><b>Call now</b><small data-hours-label>Answered 9–5 daily</small></span></a>
-  <a class="cb-quote" href="./contact/#quote">Free quote <svg class="i"><use href="#i-arrow"/></svg></a>
+  <a class="cb-quote" href="./contact-us/#quote">Free estimate <svg class="i"><use href="#i-arrow"/></svg></a>
 </div>
 
 <div class="lightbox" data-lightbox role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
@@ -551,6 +613,6 @@
   <button class="lb-nav lb-next" type="button" data-lb-next><svg class="i"><use href="#i-arrow"/></svg><span class="sr">Next photo</span></button>
 </div>
 
-<script src="./assets/js/site.js?v=f43154c88a" defer></script>
+<script src="./assets/js/site.js?v=0738970cae" defer></script>
 </body>
 </html>

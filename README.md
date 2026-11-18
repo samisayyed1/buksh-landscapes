@@ -16,14 +16,22 @@ cd docs && python3 -m http.server 8765   # preview at http://localhost:8765
 
 ## Before going live on bukshlandscapes.com
 
-1. **Quote form delivery.** By default the form opens the visitor's email app pre-filled to info@bukshlandscapes.com. To receive submissions directly, set `FORM_ENDPOINT` at the top of `src/assets/js/site.js` to a form backend (e.g. Formspree, or `https://formsubmit.co/ajax/info@bukshlandscapes.com`, which needs a one-time activation from that inbox), then rebuild.
-2. **Search indexing.** Pages carry `noindex` so this preview never competes with the live site. When it moves to the real domain, build with `SITE_URL=https://bukshlandscapes.com/ INDEXABLE=true node build.mjs`.
-3. **Reviews.** No customer reviews are shown because none could be verified publicly. Add real Google reviews (with permission) to the homepage proof strip when available.
-4. **Facts to confirm with the owner:** BBB A+ rating, "since 2017", 20+ years combined experience, warranty terms (copied from the current site's FAQ), typical base depths in the patio cross-section.
+1. **Host on Netlify or Cloudflare Pages, not GitHub Pages.** The build writes `docs/_redirects` (from `redirects.txt`) with 301 redirects for every old WordPress URL that no longer exists. GitHub Pages ignores that file; Netlify and Cloudflare Pages honour it. Publish directory: `docs`. Build command: `SITE_URL=https://bukshlandscapes.com/ INDEXABLE=true node build.mjs`.
+2. **URLs are preserved.** All 14 service pages, `/about-us/`, `/contact-us/`, `/gallery/`, `/faq/`, `/reviews/`, `/watering-info/`, `/privacy-policy/`, `/terms-conditions/`, `/blog/` and all 14 blog posts keep their exact old addresses. Everything else from the old sitemaps is in `redirects.txt`.
+3. **Tracking.** The production build (`INDEXABLE=true`) adds the existing Google Analytics 4 (`G-EZW6T2ZCXV`), Tag Manager (`GTM-MNJZSM84`) and Search Console verification tag, exactly as the old site loads them. Preview builds leave them out. After launch, submit `https://bukshlandscapes.com/sitemap.xml` in Search Console.
+4. **Quote form delivery + photo uploads.** By default the form opens the visitor's email app pre-filled (photos must be attached by hand). Set `FORM_ENDPOINT` at the top of `src/assets/js/site.js` to a form backend that accepts file uploads (e.g. Formspree paid plan, Web3Forms Pro, or FormSubmit) and the request, including up to 5 yard photos, is sent directly.
+5. **Google reviews.** Edit `src/data/reviews.json`: set `rating`, `count`, `profileUrl` (the Google Business Profile link) and `writeReviewUrl`, and paste reviews word for word. The homepage, `/reviews/` and the reviews section render them automatically. Until then they link to Google.
+6. **Facts to confirm with the owner:** BBB A+ rating, "since 2017", 20+ years combined experience, typical base depths in the patio cross-section.
+
+## Content
+
+- Service pages: `src/data/services.mjs` (one entry per page) rendered by `src/templates/service.mjs`.
+- Blog posts: `src/data/posts.json`, ported from the old WordPress blog, rendered by `src/templates/blog.mjs`.
+- Gallery categories come from `cat` in `images.json`: patios, turf, walls, builds (complete landscaping), lighting, lawns (sod & planting), commercial.
 
 ## Photo credits
 
-Every photo is Buksh's own work except the homepage hero (`garden-path-night`, also used in `og-image.jpg`): "Beautifully lit garden path" by Cee on Unsplash (https://unsplash.com/photos/R_c77Rx9UzM), free under the Unsplash License (commercial use OK, no attribution required). Swap it for a strong night shot of a real Buksh build when one exists. The gallery stays 100% Buksh work.
+Every photo on the site is Buksh's own work (no stock images). The homepage hero is `modern-home-side-lawn`; swap in a stronger project photo when the owner supplies one.
 
 ## Motion
 

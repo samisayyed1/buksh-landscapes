@@ -391,7 +391,8 @@
     const back = $("[data-q-back]", form), next = $("[data-q-next]", form), meta = $("[data-q-meta]", form);
     let step = 0;
     // prefill from ?service=
-    const pre = new URLSearchParams(location.search).get("service");
+    const preEl = $("[data-preselect]");
+    const pre = new URLSearchParams(location.search).get("service") || (preEl && preEl.dataset.preselect);
     if (pre) $$(`input[name="services"]`, form).forEach((i) => { if (i.value.toLowerCase().includes(pre.toLowerCase())) i.checked = true; });
     const go = (s, focus) => {
       step = s;
@@ -402,6 +403,23 @@
       meta.textContent = `Step ${s + 1} of ${panels.length}`;
       if (focus) { const lg = $("legend", panels[s]); lg.tabIndex = -1; lg.focus({ preventScroll: true }); }
     };
+    // yard photos: preview thumbnails, max 5 images, 10 MB each
+    const photoIn = $("[data-q-photos]", form), thumbs = $("[data-q-thumbs]", form);
+    let photos = [];
+    const drawThumbs = () => {
+      thumbs.innerHTML = "";
+      photos.forEach((f, i) => {
+        const li = document.createElement("li");
+        const im = document.createElement("img"); im.alt = ""; im.src = URL.createObjectURL(f); im.onload = () => URL.revokeObjectURL(im.src);
+        const rm = document.createElement("button"); rm.type = "button"; rm.className = "q-thumb-x"; rm.setAttribute("aria-label", `Remove photo ${i + 1}`); rm.innerHTML = '<svg class="i"><use href="#i-x"/></svg>';
+        rm.onclick = () => { photos.splice(i, 1); drawThumbs(); };
+        li.append(im, rm); thumbs.append(li);
+      });
+    };
+    if (photoIn) photoIn.addEventListener("change", () => {
+      [...photoIn.files].forEach((f) => { if (f.type.startsWith("image/") && f.size < 10e6 && photos.length < 5) photos.push(f); });
+      photoIn.value = ""; drawThumbs();
+    });
     const validate = () => {
       if (step === 0) {
         const any = $$(`input[name="services"]:checked`, form).length > 0;
@@ -439,12 +457,15 @@
         property: fd.get("property") || "", timeline: fd.get("timeline") || "", budget: fd.get("budget") || "Not sure",
         name: fd.get("name"), phone: fd.get("phone"), email: fd.get("email") || "", address: fd.get("address") || "", notes: fd.get("notes") || "",
       };
-      const body = `New quote request from the website\n\nServices: ${data.services}\nProperty: ${data.property}\nTimeline: ${data.timeline}\nBudget: ${data.budget}\n\nName: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email}\nAddress / area: ${data.address}\n\nNotes:\n${data.notes}`;
+      const body = `New quote request from the website\n\nServices: ${data.services}\nProperty: ${data.property}\nTimeline: ${data.timeline}\nBudget: ${data.budget}\n\nName: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email}\nAddress / neighbourhood: ${data.address}\n\nProject description:\n${data.notes}${photos.length ? `\n\nYard photos: ${photos.length} (attached)` : ""}`;
       next.disabled = true;
       const summary = $("[data-q-summary]", done), copyBtn = $("[data-q-copy]", done);
       if (FORM_ENDPOINT) {
         try {
-          const res = await fetch(FORM_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify({ ...data, _subject: `Quote request: ${data.name}` }) });
+          const out = new FormData();
+          Object.entries({ ...data, _subject: `Quote request: ${data.name}` }).forEach(([k, v]) => out.append(k, v));
+          photos.forEach((f, i) => out.append(`photo_${i + 1}`, f, f.name));
+          const res = await fetch(FORM_ENDPOINT, { method: "POST", headers: { Accept: "application/json" }, body: out });
           if (!res.ok) throw new Error(res.status);
           doneMsg.textContent = `Thanks ${data.name.split(" ")[0]}. Your request is in. We'll call you at ${data.phone} to set up a site visit.`;
         } catch (err) {
@@ -454,7 +475,7 @@
         }
       } else {
         location.href = `mailto:${EMAIL}?subject=${encodeURIComponent("Quote request: " + data.name)}&body=${encodeURIComponent(body)}`;
-        doneMsg.textContent = `Thanks ${data.name.split(" ")[0]}. Your email app should now be open with your request filled in: press send and we'll call you at ${data.phone}. If no email app opened, copy your request below and send it to ${EMAIL}, or call ${PHONE}.`;
+        doneMsg.textContent = `Thanks ${data.name.split(" ")[0]}. Your email app should now be open with your request filled in: ${photos.length ? `attach your ${photos.length} yard photo${photos.length > 1 ? "s" : ""}, then ` : ""}press send and we'll call you at ${data.phone}. If no email app opened, copy your request below and send it to ${EMAIL}, or call ${PHONE}.`;
         summary.textContent = `To: ${EMAIL}\n\n${body}`; summary.hidden = false;
         if (navigator.clipboard) { copyBtn.hidden = false; copyBtn.onclick = () => navigator.clipboard.writeText(body).then(() => (copyBtn.textContent = "Copied")); }
       }

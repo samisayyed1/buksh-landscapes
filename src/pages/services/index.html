@@ -1,0 +1,45 @@
+<!--{
+  "title": "Landscaping Services in Edmonton | Residential & Commercial | Buksh Landscapes",
+  "description": "Every Buksh Landscapes service in one place: patios, artificial turf, grading, sod, retaining walls, rock and mulch, planting, lighting, complete landscaping, commercial maintenance and snow removal.",
+  "nav": "services",
+  "hero": "aerial-modern-build"
+}-->
+<section class="page-hero" data-p="exit">
+  <div class="ph-media">{{img name="aerial-modern-build" sizes="100vw" loading="eager" priority="1"}}</div>
+  <div class="wrap">
+    <p class="crumbs"><a href="{{root}}">Home</a><span>/</span><span>Services</span></p>
+    <h1 class="h1" style="max-width:15ch">Landscaping services in Edmonton.</h1>
+    <p class="lede">From rough and final grading with guaranteed certification to the finished yard, plus year-round care for commercial properties. One accountable crew for all of it.</p>
+    <div class="hero-actions"><a class="btn btn-gold btn-lg" href="{{root}}contact-us/#quote">Request a free estimate <svg class="i"><use href="#i-arrow"/></svg></a><a class="btn btn-ghost-light btn-lg" href="tel:{{phone}}"><svg class="i"><use href="#i-phone"/></svg> {{phoneDisplay}}</a></div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="res-h">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Residential</span>
+      <h2 class="h2" id="res-h">Your yard, built once and built right.</h2>
+      <p class="lede">Homeowners and homebuilders: pick a service to see what's included, how we build it and photos of our work.</p>
+    </div>
+    <div class="svc-grid hub-grid">
+{{svcRes}}
+    </div>
+  </div>
+</section>
+
+<section class="section on-dark" aria-labelledby="com-h">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Commercial</span>
+      <h2 class="h2" id="com-h">Commercial properties, kept sharp all year.</h2>
+      <p class="lede">Snow cleared and hauled all winter, grounds maintained all summer, and machines with operators when you need them.</p>
+    </div>
+    <div class="svc-grid hub-grid">
+{{svcCom}}
+    </div>
+  </div>
+</section>
+
+{{> why}}
+
+{{> quote}}

@@ -1,7 +1,7 @@
 <section class="section quote on-dark" id="quote" aria-labelledby="quote-h">
   <div class="wrap quote-grid">
     <div class="quote-aside">
-      <span class="kicker">Free estimate</span>
+      <span class="kicker">Request a free estimate</span>
       <h2 class="h2" id="quote-h" style="margin-top:18px">Let's walk your yard.</h2>
       <p class="lede" style="margin-top:18px">Three quick steps. We'll come out, measure, talk through ideas and give you a written estimate. No cost, no pressure.</p>
       <ul>
@@ -84,7 +84,13 @@
             <div class="field"><label for="q-phone">Phone</label><input id="q-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" data-req aria-describedby="q-phone-err"><p class="err" id="q-phone-err">Enter a 10-digit phone number.</p></div>
             <div class="field"><label for="q-email">Email <small style="font-weight:400;color:var(--granite)">(optional)</small></label><input id="q-email" name="email" type="email" autocomplete="email" data-email aria-describedby="q-email-err"><p class="err" id="q-email-err">Check the email address.</p></div>
             <div class="field"><label for="q-addr">Address or neighbourhood</label><input id="q-addr" name="address" autocomplete="street-address"></div>
-            <div class="field full"><label for="q-notes">Anything else? <small style="font-weight:400;color:var(--granite)">(optional)</small></label><textarea id="q-notes" name="notes" maxlength="1000" placeholder="Yard size, what's there now, ideas you've saved…"></textarea></div>
+            <div class="field full"><label for="q-notes">Describe your project <small style="font-weight:400;color:var(--granite)">(optional)</small></label><textarea id="q-notes" name="notes" maxlength="1500" placeholder="Yard size, what's there now, what you'd like, ideas you've saved…"></textarea></div>
+            <div class="field full q-photos">
+              <span class="q-label-s" id="q-photos-l">Photos of your yard <small style="font-weight:400;color:var(--granite)">(optional, up to 5)</small></span>
+              <label class="q-drop" for="q-photos"><svg class="i" aria-hidden="true"><use href="#i-camera"/></svg><span><b>Add photos</b><small>Snap the yard from a few angles. It helps us plan the visit.</small></span></label>
+              <input id="q-photos" class="sr" name="photos" type="file" accept="image/*" multiple aria-labelledby="q-photos-l" data-q-photos>
+              <ul class="q-thumbs" data-q-thumbs aria-live="polite"></ul>
+            </div>
           </div>
           <div class="hp" aria-hidden="true"><label>Leave empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
         </fieldset>

@@ -24,7 +24,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=swap">
 
-<link rel="stylesheet" href="/buksh-landscapes/assets/css/site.css?v=e4640f2376">
+
+<link rel="stylesheet" href="/buksh-landscapes/assets/css/site.css?v=b44d993026">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
 {
@@ -62,6 +63,7 @@
 </script>
 </head>
 <body class="">
+
 <a class="skip" href="#main">Skip to content</a>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
@@ -80,10 +82,12 @@
   <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></symbol>
   <symbol id="i-insta" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></symbol>
   <symbol id="i-fb" viewBox="0 0 24 24"><path d="M15 3h-2.5A4.5 4.5 0 0 0 8 7.5V10H5.5v3.5H8V21h3.5v-7.5H14l.5-3.5h-3V7.8c0-.7.6-1.3 1.3-1.3H15z"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
 </svg>
 
-<div class="season-bar" data-season-bar><div class="wrap"><span class="sb-dot" aria-hidden="true"></span><span data-season-msg>Booking spring 2027 design visits now.</span> <a href="/buksh-landscapes/contact/#quote" data-season-link>Book a visit <svg class="i"><use href="#i-arrow"/></svg></a></div></div>
+<div class="season-bar" data-season-bar><div class="wrap"><span class="sb-dot" aria-hidden="true"></span><span data-season-msg>Booking spring 2027 design visits now.</span> <a href="/buksh-landscapes/contact-us/#quote" data-season-link>Book a visit <svg class="i"><use href="#i-arrow"/></svg></a></div></div>
 
 <header class="site-header" data-header>
   <div class="wrap header-in">
@@ -92,16 +96,24 @@
     </a>
     <nav class="nav" aria-label="Main">
       <ul>
-        <li><a href="/buksh-landscapes/services/landscaping-services/" data-nav="services">Landscaping</a></li>
-        <li><a href="/buksh-landscapes/services/commercial/" data-nav="commercial">Commercial &amp; snow</a></li>
+        <li class="has-mega"><a href="/buksh-landscapes/services/" data-nav="services">Services<svg class="i chev" aria-hidden="true"><use href="#i-chev"/></svg></a>
+          <div class="mega">
+            <div class="mega-in">
+              <div><p class="mega-k">Residential</p><ul><li><a href="/buksh-landscapes/services/landscaping-services/">Complete landscape construction</a></li><li><a href="/buksh-landscapes/services/paver-patios/">Patios & paving stones</a></li><li><a href="/buksh-landscapes/services/artificial-grass/">Artificial turf & putting greens</a></li><li><a href="/buksh-landscapes/services/rough-final-grading/">Rough & final grading</a></li><li><a href="/buksh-landscapes/services/sod-installation/">Sod installation</a></li><li><a href="/buksh-landscapes/services/retaining-walls/">Retaining walls</a></li><li><a href="/buksh-landscapes/services/rock-mulch-ground-cover/">Decorative rock & mulch</a></li><li><a href="/buksh-landscapes/services/tree-and-shrub-installation/">Trees & shrubs</a></li><li><a href="/buksh-landscapes/services/landscape-lighting/">Landscape lighting</a></li><li><a href="/buksh-landscapes/services/fire-pits/">Fire pits</a></li><li><a href="/buksh-landscapes/services/water-features/">Water features</a></li></ul></div>
+              <div><p class="mega-k">Commercial</p><ul><li><a href="/buksh-landscapes/services/summer-maintenance/">Commercial lawn maintenance</a></li><li><a href="/buksh-landscapes/services/winter-maintenance/">Commercial snow removal</a></li><li><a href="/buksh-landscapes/services/skidsteer-services/">Skid steer services</a></li></ul>
+                <a class="mega-card" href="/buksh-landscapes/services/"><span>All services</span><svg class="i"><use href="#i-arrow"/></svg></a></div>
+            </div>
+          </div>
+        </li>
         <li><a href="/buksh-landscapes/gallery/" data-nav="gallery">Our work</a></li>
-        <li><a href="/buksh-landscapes/about/" data-nav="about">About</a></li>
-        <li><a href="/buksh-landscapes/contact/" data-nav="contact">Contact</a></li>
+        <li><a href="/buksh-landscapes/reviews/" data-nav="reviews">Reviews</a></li>
+        <li><a href="/buksh-landscapes/about-us/" data-nav="about">About</a></li>
+        <li><a href="/buksh-landscapes/contact-us/" data-nav="contact">Contact</a></li>
       </ul>
     </nav>
     <div class="header-cta">
       <a class="hdr-phone" href="tel:+17809408283" aria-label="Call 780-940-8283"><svg class="i"><use href="#i-phone"/></svg><span>780-940-8283</span></a>
-      <a class="btn btn-gold btn-sm" href="/buksh-landscapes/contact/#quote">Free quote</a>
+      <a class="btn btn-gold btn-sm hdr-quote" href="/buksh-landscapes/contact-us/#quote"><span class="hq-long">Request a free estimate</span><span class="hq-short">Free estimate</span></a>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="m-menu" data-menu-btn><svg class="i"><use href="#i-menu"/></svg><span class="sr">Open menu</span></button>
     </div>
   </div>
@@ -112,14 +124,18 @@
     <button class="m-close" type="button" data-menu-close><svg class="i"><use href="#i-x"/></svg><span class="sr">Close menu</span></button>
     <ul class="m-links">
       <li><a href="/buksh-landscapes/">Home</a></li>
-      <li><a href="/buksh-landscapes/services/landscaping-services/">Landscaping</a></li>
-      <li><a href="/buksh-landscapes/services/commercial/">Commercial &amp; snow</a></li>
+      <li><details class="m-svc"><summary>Services<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <p class="mega-k">Residential</p><ul><li><a href="/buksh-landscapes/services/landscaping-services/">Complete landscape construction</a></li><li><a href="/buksh-landscapes/services/paver-patios/">Patios & paving stones</a></li><li><a href="/buksh-landscapes/services/artificial-grass/">Artificial turf & putting greens</a></li><li><a href="/buksh-landscapes/services/rough-final-grading/">Rough & final grading</a></li><li><a href="/buksh-landscapes/services/sod-installation/">Sod installation</a></li><li><a href="/buksh-landscapes/services/retaining-walls/">Retaining walls</a></li><li><a href="/buksh-landscapes/services/rock-mulch-ground-cover/">Decorative rock & mulch</a></li><li><a href="/buksh-landscapes/services/tree-and-shrub-installation/">Trees & shrubs</a></li><li><a href="/buksh-landscapes/services/landscape-lighting/">Landscape lighting</a></li><li><a href="/buksh-landscapes/services/fire-pits/">Fire pits</a></li><li><a href="/buksh-landscapes/services/water-features/">Water features</a></li></ul>
+        <p class="mega-k">Commercial</p><ul><li><a href="/buksh-landscapes/services/summer-maintenance/">Commercial lawn maintenance</a></li><li><a href="/buksh-landscapes/services/winter-maintenance/">Commercial snow removal</a></li><li><a href="/buksh-landscapes/services/skidsteer-services/">Skid steer services</a></li></ul>
+        <a class="m-all" href="/buksh-landscapes/services/">All services <svg class="i"><use href="#i-arrow"/></svg></a>
+      </details></li>
       <li><a href="/buksh-landscapes/gallery/">Our work</a></li>
-      <li><a href="/buksh-landscapes/about/">About</a></li>
-      <li><a href="/buksh-landscapes/contact/">Contact</a></li>
+      <li><a href="/buksh-landscapes/reviews/">Reviews</a></li>
+      <li><a href="/buksh-landscapes/about-us/">About</a></li>
+      <li><a href="/buksh-landscapes/contact-us/">Contact</a></li>
     </ul>
     <div class="m-actions">
-      <a class="btn btn-gold btn-lg" href="/buksh-landscapes/contact/#quote">Get a free quote <svg class="i"><use href="#i-arrow"/></svg></a>
+      <a class="btn btn-gold btn-lg" href="/buksh-landscapes/contact-us/#quote">Request a free estimate <svg class="i"><use href="#i-arrow"/></svg></a>
       <a class="btn btn-ghost-light btn-lg" href="tel:+17809408283"><svg class="i"><use href="#i-phone"/></svg> Call 780-940-8283</a>
       <p class="m-meta">Phones answered 9 am – 5 pm, 7 days a week</p>
     </div>
@@ -145,7 +161,7 @@
       <p class="ft-mark" aria-hidden="true" data-depth-text>Built for<br>Edmonton.</p>
       <div class="ft-cta">
         <p>Tell us what you're picturing. We'll come see the yard, measure it, and give you a written estimate.</p>
-        <a class="btn btn-gold btn-lg" href="/buksh-landscapes/contact/#quote">Get a free quote <svg class="i"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-gold btn-lg" href="/buksh-landscapes/contact-us/#quote">Request a free estimate <svg class="i"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
     <div class="ft-grid">
@@ -160,22 +176,22 @@
       <div class="ft-col">
         <h2 class="ft-h">Landscaping</h2>
         <ul>
-          <li><a href="/buksh-landscapes/services/landscaping-services/#patios">Paver patios</a></li>
-          <li><a href="/buksh-landscapes/services/landscaping-services/#turf">Artificial turf</a></li>
-          <li><a href="/buksh-landscapes/services/landscaping-services/#grading">Rough &amp; final grading</a></li>
-          <li><a href="/buksh-landscapes/services/landscaping-services/#sod">Sod</a></li>
-          <li><a href="/buksh-landscapes/services/landscaping-services/#walls">Retaining walls</a></li>
-          <li><a href="/buksh-landscapes/services/landscaping-services/#lighting">Landscape lighting</a></li>
+          <li><a href="/buksh-landscapes/services/landscaping-services/">Complete landscape construction</a></li><li><a href="/buksh-landscapes/services/paver-patios/">Patios & paving stones</a></li><li><a href="/buksh-landscapes/services/artificial-grass/">Artificial turf & putting greens</a></li><li><a href="/buksh-landscapes/services/rough-final-grading/">Rough & final grading</a></li><li><a href="/buksh-landscapes/services/sod-installation/">Sod installation</a></li><li><a href="/buksh-landscapes/services/retaining-walls/">Retaining walls</a></li><li><a href="/buksh-landscapes/services/rock-mulch-ground-cover/">Decorative rock & mulch</a></li><li><a href="/buksh-landscapes/services/tree-and-shrub-installation/">Trees & shrubs</a></li><li><a href="/buksh-landscapes/services/landscape-lighting/">Landscape lighting</a></li><li><a href="/buksh-landscapes/services/fire-pits/">Fire pits</a></li><li><a href="/buksh-landscapes/services/water-features/">Water features</a></li>
         </ul>
       </div>
       <div class="ft-col">
         <h2 class="ft-h">Commercial</h2>
         <ul>
-          <li><a href="/buksh-landscapes/services/commercial/#maintenance">Lawn maintenance</a></li>
-          <li><a href="/buksh-landscapes/services/commercial/#snow">Snow removal</a></li>
-          <li><a href="/buksh-landscapes/services/commercial/#skidsteer">Skid steer services</a></li>
+          <li><a href="/buksh-landscapes/services/summer-maintenance/">Commercial lawn maintenance</a></li><li><a href="/buksh-landscapes/services/winter-maintenance/">Commercial snow removal</a></li><li><a href="/buksh-landscapes/services/skidsteer-services/">Skid steer services</a></li>
+        </ul>
+        <h2 class="ft-h" style="margin-top:28px">Company</h2>
+        <ul>
           <li><a href="/buksh-landscapes/gallery/">Project gallery</a></li>
-          <li><a href="/buksh-landscapes/about/#faq">FAQ</a></li>
+          <li><a href="/buksh-landscapes/reviews/">Reviews</a></li>
+          <li><a href="/buksh-landscapes/about-us/">About us</a></li>
+          <li><a href="/buksh-landscapes/faq/">FAQ</a></li>
+          <li><a href="/buksh-landscapes/watering-info/">Watering info</a></li>
+          <li><a href="/buksh-landscapes/blog/">Blog</a></li>
         </ul>
       </div>
       <div class="ft-col">
@@ -184,20 +200,20 @@
           <li><a href="tel:+17809408283"><svg class="i"><use href="#i-phone"/></svg>780-940-8283</a></li>
           <li><a href="mailto:info@bukshlandscapes.com"><svg class="i"><use href="#i-mail"/></svg>info@bukshlandscapes.com</a></li>
           <li><span><svg class="i"><use href="#i-clock"/></svg>Mon – Sun, 9 am – 5 pm</span></li>
-          <li><span><svg class="i"><use href="#i-pin"/></svg>Edmonton &amp; surrounding areas</span></li>
+          <li><span><svg class="i"><use href="#i-pin"/></svg>Edmonton, St. Albert, Sherwood Park, Spruce Grove, Leduc, Fort Saskatchewan &amp; area</span></li>
         </ul>
       </div>
     </div>
     <div class="ft-base">
       <p>© 2026 Buksh Landscapes Ltd. All rights reserved.</p>
-      <p><a href="https://www.financeit.ca/s/Jo1VEA" rel="noopener" target="_blank">Financing through Financeit</a></p>
+      <p><a href="/buksh-landscapes/privacy-policy/">Privacy policy</a> · <a href="/buksh-landscapes/terms-conditions/">Terms</a> · <a href="https://www.financeit.ca/s/Jo1VEA" rel="noopener" target="_blank">Financing through Financeit</a></p>
     </div>
   </div>
 </footer>
 
 <div class="callbar" data-callbar>
   <a class="cb-call" href="tel:+17809408283"><svg class="i"><use href="#i-phone"/></svg><span><b>Call now</b><small data-hours-label>Answered 9–5 daily</small></span></a>
-  <a class="cb-quote" href="/buksh-landscapes/contact/#quote">Free quote <svg class="i"><use href="#i-arrow"/></svg></a>
+  <a class="cb-quote" href="/buksh-landscapes/contact-us/#quote">Free estimate <svg class="i"><use href="#i-arrow"/></svg></a>
 </div>
 
 <div class="lightbox" data-lightbox role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
@@ -207,6 +223,6 @@
   <button class="lb-nav lb-next" type="button" data-lb-next><svg class="i"><use href="#i-arrow"/></svg><span class="sr">Next photo</span></button>
 </div>
 
-<script src="/buksh-landscapes/assets/js/site.js?v=f43154c88a" defer></script>
+<script src="/buksh-landscapes/assets/js/site.js?v=0738970cae" defer></script>
 </body>
 </html>

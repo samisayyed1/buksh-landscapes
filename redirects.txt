@@ -1,0 +1,27 @@
+# Old bukshlandscapes.com (WordPress) URLs -> new pages. 301 = permanent, keeps Google rankings.
+# Every service URL, /about-us/, /contact-us/, /gallery/, /faq/, /reviews/, /watering-info/,
+# /privacy-policy/ and /terms-conditions/ keep their exact old address, so they need no redirect.
+/home                                   /                        301
+/sitemap                                /sitemap.xml             301
+/sitemap_index.xml                      /sitemap.xml             301
+/page-sitemap.xml                       /sitemap.xml             301
+/post-sitemap.xml                       /sitemap.xml             301
+/appointments                           /contact-us/#quote       301
+/appointments/                          /contact-us/#quote       301
+/about-us/the-process/                  /about-us/               301
+/about-us/sustainable-practices/        /about-us/               301
+/about-us/partners-clients/             /about-us/               301
+/case-studies/                          /gallery/                301
+/standard-jetpack-gallery/              /gallery/                301
+/portfolio/                             /gallery/                301
+/portfolio/*                            /gallery/                301
+/project-type/*                         /gallery/                301
+/author/*                               /about-us/               301
+/category/*                             /blog/                   301
+/feed                                   /                        301
+/feed/                                  /                        301
+/wp-admin/*                             /                        301
+/wp-login.php                           /                        301
+/about/                                 /about-us/               301
+/contact/                               /contact-us/             301
+/services/commercial/                   /services/summer-maintenance/ 301
