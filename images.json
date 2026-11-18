@@ -730,5 +730,37 @@
   ],
   "cat": "none",
   "alt": "Side yard of a modern home with sod, boulders and young trees"
+ },
+ "estate-lawn-portrait": {
+  "w": 1620,
+  "h": 2160,
+  "widths": [
+   640,
+   960,
+   1280,
+   1620
+  ],
+  "cat": "none",
+  "alt": "Estate home with a broad new lawn and curved mulch beds"
+ },
+ "front-lawn-new-portrait": {
+  "w": 900,
+  "h": 1200,
+  "widths": [
+   640,
+   900
+  ],
+  "cat": "none",
+  "alt": "New sod front lawn at a dark-sided home"
+ },
+ "turf-curve-fence-2-portrait": {
+  "w": 900,
+  "h": 1200,
+  "widths": [
+   640,
+   900
+  ],
+  "cat": "none",
+  "alt": "Turf lawn and curved concrete path with new cedars"
  }
 }

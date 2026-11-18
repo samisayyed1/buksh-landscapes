@@ -383,6 +383,47 @@
     lb.addEventListener("touchend", (e) => { const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1)); });
   }
 
+  /* ---------------- Home hero: cross-fading project slideshow ----------------
+     The first photo is the real <img> (fast first paint). The others load only after the
+     page has finished loading, and each joins the cycle once fully decoded, so a fade never
+     shows a half-loaded image. Pauses off-screen / in a background tab; off for reduced motion. */
+  const slideWrap = $("[data-hero-slides]");
+  if (slideWrap && !reduce) {
+    const slides = $$("[data-hero-slide]", slideWrap);
+    const ready = new Set([slides[0]]);   // slides fully decoded; always shown in page order
+    let cur = 0, timer = 0, visible = true;
+    const HOLD = 6500;
+    const show = (next) => {
+      const a = slides[cur], b = slides[next];
+      if (a === b) return;
+      slides.forEach((s) => { if (s !== a && s !== b) s.classList.remove("is-on", "is-out"); });
+      b.classList.remove("is-out", "is-on"); void b.offsetWidth;   // restart its push-in
+      b.classList.add("is-on");
+      a.classList.remove("is-on"); a.classList.add("is-out");
+      cur = next;
+    };
+    const tick = () => {
+      if (!visible || document.hidden) return;
+      for (let k = 1; k < slides.length; k++) { const n = (cur + k) % slides.length; if (ready.has(slides[n])) return show(n); }
+    };
+    const load = () => {
+      slideWrap.classList.add("hero-slides-on");
+      slides.slice(1).forEach((s) => {
+        const img = $("img", s);
+        $$("[data-srcset]", s).forEach((el) => { el.srcset = el.dataset.srcset; el.removeAttribute("data-srcset"); });
+        const add = () => ready.add(s);
+        (img.decode ? img.decode() : Promise.resolve()).then(add, () => { if (img.complete && img.naturalWidth) add(); });
+      });
+      timer = setInterval(tick, HOLD);
+    };
+    if ("IntersectionObserver" in window) new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(slideWrap);
+    const conn = navigator.connection;
+    if (!(conn && conn.saveData)) {
+      const go = () => setTimeout(load, 1800);
+      if (document.readyState === "complete") go(); else addEventListener("load", go, { once: true });
+    }
+  }
+
   /* ---------------- Quote form (3 steps) ---------------- */
   const form = $("[data-qform]");
   if (form) {

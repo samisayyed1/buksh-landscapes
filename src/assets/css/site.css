@@ -1104,3 +1104,20 @@ html:not(.js) .spec li { opacity: 1; }
 .post-body time { font: 500 .72rem/1 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--granite); }
 .post-body b { font: 800 1.2rem/1.2 var(--f-display); font-variation-settings: "wdth" 108; letter-spacing: -.01em; }
 .post-ex { color: var(--granite); font-size: .94rem; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* home hero: slow cross-fading slideshow of real Buksh projects.
+   Each slide fades over 2.2s while a gentle push-in (Ken Burns) runs on its wrapper;
+   only opacity and scale change, so it stays on the GPU. */
+.hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 2.2s cubic-bezier(.45, 0, .25, 1); }
+.hero-slide.is-on { opacity: 1; z-index: 1; }
+.hero-slide.is-out { opacity: 0; z-index: 0; }
+.hero-slide picture { display: block; width: 100%; height: 100%; }
+.hero-media .hero-slide img { object-position: var(--op, 50% 55%); }
+.hero-slide:not(:first-child) img { animation: none; }
+.hero-slides-on .hero-slide.is-on, .hero-slides-on .hero-slide.is-out { animation: heroPush 9.5s cubic-bezier(.25, .1, .25, 1) both; will-change: transform, opacity; }
+@keyframes heroPush { from { scale: 1; } to { scale: 1.075; } }
+@media (max-width: 699px) {
+  .hero-media .hero-slide img { object-position: var(--op-m, 50% 30%); animation: none; }
+  .hero-media .hero-slide:first-child img { animation: heroSettle 2.2s var(--ease-out) both; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-slide { transition: none; } .hero-slides-on .hero-slide { animation: none !important; } }
